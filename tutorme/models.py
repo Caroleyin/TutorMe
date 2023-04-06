@@ -23,6 +23,7 @@ class StudentProfile(models.Model):
 
 class TutorProfile(models.Model):
     user = models.OneToOneField(AppUser, on_delete=models.CASCADE, primary_key = True)
+    hourly_rate = models.FloatField(default=0)
 
     @receiver(post_save, sender=AppUser)
     def create_user_profile(sender, instance, created, **kwargs):
