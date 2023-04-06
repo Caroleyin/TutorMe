@@ -2,6 +2,7 @@ from allauth.socialaccount.forms import SignupForm
 from django import forms
 
 from .models import AppUser
+from .models import StudentProfile
  
  
 class CustomSignupForm(SignupForm):
@@ -23,3 +24,8 @@ class CustomSignupForm(SignupForm):
             user.is_tutor = False
         user.save()
         return user
+
+class ProfileForm(forms.ModelForm):
+	class Meta: 
+		model = StudentProfile
+		fields = ('about', 'courses')
