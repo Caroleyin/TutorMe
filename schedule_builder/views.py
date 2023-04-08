@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.http import JsonResponse 
 from schedule_builder.models import Events
-from tutorme.models import TutorProfile
+from tutorme.models import AppUser
 from .forms import AddClass
 from django.contrib.auth.decorators import login_required
 

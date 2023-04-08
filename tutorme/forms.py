@@ -25,7 +25,9 @@ class CustomSignupForm(SignupForm):
         user.save()
         return user
 
-class ProfileForm(forms.ModelForm):
-	class Meta: 
-		model = StudentProfile
-		fields = ('about', 'courses')
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = get_user_model()
+        fields = ['first_name', 'last_name', 'email', 'description']

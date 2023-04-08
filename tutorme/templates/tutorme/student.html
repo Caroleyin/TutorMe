@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutor View</title>
+    <title>Student View</title>
   </head>
 
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -50,7 +50,7 @@
                         <li style="padding-top: 2rem;">
                           <a href="#" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
-                            Dashboard
+                            Find a Tutor
                           </a>
                         </li>
                         <li style="padding-top: 2rem;"> 
@@ -60,7 +60,7 @@
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
-                          <a href="#" class="nav-link text-white">
+                          <a href="/tutorme/student/studentprofile" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#people-circle"></use></svg>
                             Profile
                           </a>
@@ -69,8 +69,8 @@
                     <hr>
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">TODO: Username</span>
+                            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">{{user}}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div class="col py-3">
-                Content area...
+                {Student} Content area...
             </div>
         </div>
     </div>
