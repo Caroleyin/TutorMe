@@ -8,7 +8,7 @@ from tutorme.models import AppUser
 from .forms import AddClass
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import UserUpdateForm, ProfileUpdateForm
+from .forms import AddClass
 
 
 @login_required
