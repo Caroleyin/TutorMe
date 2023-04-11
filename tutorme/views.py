@@ -34,9 +34,18 @@ class StudentView(generic.ListView):
             print(text)
             if text:
                 user_profile = request.user
-                textBoxCourse = CourseAsText.objects.create(title=text)
-                user_profile.courses.add(textBoxCourse)
+
+                course = CourseAsText.objects.filter(title=text).first()
+                if (course is None):
+                    course = CourseAsText.objects.create(title=text)
+
+                findClass = user_profile.courses.filter(pk=course.pk).first()
+                if (findClass is None):
+                    findClass = course
+
+                user_profile.courses.add(findClass)
                 user_profile.save()
+
                 return redirect('/tutorme/student/')
         return JsonResponse({'status': 'error'})
 
