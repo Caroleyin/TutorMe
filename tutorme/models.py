@@ -8,6 +8,7 @@ class AppUser(AbstractUser):
     is_student = models.BooleanField(default=False)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    courses = models.ManyToManyField('CourseAsText', blank=True)
 
 class StudentProfile(models.Model):
     user = models.OneToOneField(AppUser, on_delete=models.CASCADE, primary_key = True)
@@ -43,3 +44,5 @@ class Course(models.Model):
     start_time = models.CharField(max_length=200)
     end_time = models.CharField(max_length=200)
 
+class CourseAsText(models.Model):
+    title = models.CharField(max_length=100)

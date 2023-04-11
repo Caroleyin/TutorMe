@@ -3,6 +3,10 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from .models import AppUser, CourseAsText
+from django.shortcuts import redirect
 
 class IndexView(generic.ListView):
     template_name = 'tutorme/index.html'
@@ -19,6 +23,22 @@ class StudentView(generic.ListView):
     template_name = 'tutorme/student.html'
     def get_queryset(self):
         return
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            text = request.body.decode('utf-8')
+
+            text = text[93:]
+            ampIndex = text.find('&')
+            text = text[:ampIndex]
+            text = text.replace('+', ' ')
+            print(text)
+            if text:
+                user_profile = request.user
+                textBoxCourse = CourseAsText.objects.create(title=text)
+                user_profile.courses.add(textBoxCourse)
+                user_profile.save()
+                return redirect('/tutorme/student/')
+        return JsonResponse({'status': 'error'})
 
 class StudentProfileView(generic.ListView):
     template_name = 'tutorme/profile.html'
