@@ -8,18 +8,9 @@ class AppUser(AbstractUser):
     is_student = models.BooleanField(default=False)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-
-class StudentProfile(models.Model):
-    user = models.OneToOneField(AppUser, on_delete=models.CASCADE, primary_key = True)
-
-    @receiver(post_save, sender=AppUser)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            StudentProfile.objects.create(user=instance)
-
-    # @receiver(post_save, sender=AppUser)
-    #  def save_user_profile(sender, instance, **kwargs):
-    #     instance.profile.save()
+    year = models.CharField("Year", max_length=4, default='', blank=True)
+    major = models.CharField("Major(s)/minor(s)", max_length=100, default='', blank=True)
+    description = models.TextField("Description", max_length=600, default='', blank=True)
 
 class Course(models.Model):
     title = models.CharField(max_length=100)
@@ -31,3 +22,6 @@ class Course(models.Model):
     start_time = models.CharField(max_length=200)
     end_time = models.CharField(max_length=200)
 
+class StudentProfile(models.Model):
+    user = models.OneToOneField(AppUser, on_delete=models.CASCADE, primary_key = True)
+    courses = models.ManyToManyField(Course)

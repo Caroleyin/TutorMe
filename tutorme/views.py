@@ -21,7 +21,7 @@ class StudentView(generic.ListView):
         return
 
 class StudentProfileView(generic.ListView):
-    template_name = 'tutorme/profile.html'
+    template_name = 'tutorme/studentprofile.html'
     def get_queryset(self):
         return
 
@@ -34,3 +34,8 @@ class AboutView(generic.ListView):
     template_name = 'tutorme/about.html'
     def get_queryset(self):
         return
+
+def userpage(request):
+	user_form = CustomSignupForm(instance=request.user)
+	profile_form = ProfileForm(instance=request.user.profile)
+	return render(request=request, template_name="tutorme/studentprofile.html", context={"user":request.user, "user_form":user_form, "profile_form":profile_form })
