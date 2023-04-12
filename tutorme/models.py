@@ -11,6 +11,7 @@ class AppUser(AbstractUser):
     year = models.CharField("Year", max_length=4, default='', blank=True)
     major = models.CharField("Major(s)/minor(s)", max_length=100, default='', blank=True)
     description = models.TextField("Description", max_length=600, default='', blank=True)
+    hourly_rate = models.FloatField(default=0)
 
 class Course(models.Model):
     title = models.CharField(max_length=100)

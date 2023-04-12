@@ -54,6 +54,7 @@
 </svg>
   
   <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
+    
     <section class="main">
       <div class="container-fluid">
         <div class="row flex-nowrap">
@@ -71,17 +72,18 @@
                       </li>
                         
                         <li style="padding-top: 2rem;"> 
-                          <a href="{% url 'schedule_builder:schedule_index' %}" class="nav-link active" aria-current="page">
+                          <a href="{% url 'schedule_builder:schedule_index' %}" class="nav-link text-white" aria-current="page">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                             Schedule
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
-                          <a href="#" class="nav-link text-white">
+                          <a href="{% url 'schedule_builder:tutor' %}" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#people-circle"></use></svg>
-                            Notifications
+                            Profile
                           </a>
                         </li>
+
                         <li style="padding-top: 2rem;">
                           <a href="#" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#people-circle"></use></svg>
