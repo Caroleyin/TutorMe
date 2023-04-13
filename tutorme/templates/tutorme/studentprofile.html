@@ -3,6 +3,7 @@
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
+{% load crispy_forms_tags %}
 
 <!-- {% if user.is_authenticated %} -->
 
@@ -13,7 +14,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutor View</title>
+    <title>Viewing Student Profile</title>
 
     <link rel="stylesheet" href="{% static 'tutorme/style.css' %}">
 
@@ -93,24 +94,46 @@
             <div class ="main">
 
               <div class="profilecontainer">
-              <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" />
-              <span class = "profileabout">
-              <h1>{{user.first_name}} {{user.last_name}} (@{{ user }})<span class="rate">$20 / hr</span></h1>
+              <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" width="150px"/>
+        
+
+              <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <h1>{{user.first_name}} {{user.last_name}} (@{{user}})<span class="rate">$20 / hr</span></h1>
               <h3>4.9★ / 10 Reviews</h3>
               <div class="row align-items-center">
                   <div class="col-lg-6 px-xl-10">
                       <ul class="list-unstyled mb-1-9">
-                          <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Year: </span> 2024</li>
-                          <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Major: </span> Computer Science</li>
+                          <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Year: </span> {{user.year}}</li>
+                          <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Major: </span> {{user.major}}</li>
                           <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email: </span> {{ user.email }} </li>
+                          <li class="mb-2 mb-xl-3 display-28">{{ user.description }} </li>
                       </ul>
-      
                   </div>
               </div>
-          </span>
       
-          <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#profileModal">Edit Profile</button>
-      
+          <!--<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#profileModal">Edit Profile</button>-->
+          {% if user.username == form.instance.username %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Edit Profile Information</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.first_name|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.last_name|as_crispy_field }}
+                    </div>
+                </div> 
+                {{ form.year|as_crispy_field }}
+                {{ form.major|as_crispy_field }}
+                {{ form.description|as_crispy_field }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        {% endif %}
+    </form>
+  
           </div>
       
             </div>

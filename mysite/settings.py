@@ -142,7 +142,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SITE_ID = 11
+SITE_ID = 13
 
 AUTH_USER_MODEL = 'tutorme.AppUser'
 

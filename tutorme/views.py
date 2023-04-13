@@ -3,6 +3,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib.auth import get_user_model
+from .forms import UserUpdateForm
 
 class IndexView(generic.ListView):
     template_name = 'tutorme/index.html'
@@ -39,3 +41,24 @@ def userpage(request):
 	user_form = CustomSignupForm(instance=request.user)
 	profile_form = ProfileForm(instance=request.user.profile)
 	return render(request=request, template_name="tutorme/studentprofile.html", context={"user":request.user, "user_form":user_form, "profile_form":profile_form })
+
+
+def profile(request, username):
+    if request.method == 'POST':
+        user = request.user
+        form = UserUpdateForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            user_form = form.save()
+
+            messages.success(request, f'{user_form}, Your profile has been updated!')
+            return redirect('profile', user_form.username)
+
+        for error in list(form.errors.values()):
+            messages.error(request, error)
+
+    user = get_user_model().objects.filter(username=username).first()
+    if user:
+        form = UserUpdateForm(instance=user)
+        form.fields['description'].widget.attrs = {'rows': 1}
+        return render(request, 'tutorme/studentprofile.html', context={'form': form})
+    return render(request, 'tutorme/studentprofile.html')
