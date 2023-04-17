@@ -1,20 +1,30 @@
-from django.shortcuts import render
+
 
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.http import JsonResponse 
 from schedule_builder.models import Events
 from tutorme.models import AppUser
+from django.views import generic
+from django.contrib.auth import get_user_model
 from .forms import UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.shortcuts import redirect
 
-
+"""
 @login_required
+
 def profile(request):
 	if request.method == 'POST':
 		u_form = UserUpdateForm(request.POST, instance=request.user)
 
+		if u_form.is_valid():
+			u_form.save()
+			messages.success(request, f'Your account has been updated!')
+			return redirect('schedule_builder:tutor')
+	else:
+		u_form = UserUpdateForm(instance=request.user)
 		if u_form.is_valid():
 			u_form.save()
 			messages.success(request, f'Your account has been updated!')
@@ -27,6 +37,26 @@ def profile(request):
 	}
 
 	return render(request, 'tutor_base.html', context)
+    """
+def profile(request, username):
+    if request.method == 'POST':
+        user = request.user
+        form = UserUpdateForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            user_form = form.save()
+
+            messages.success(request, f'{user_form}, Your profile has been updated!')
+            return redirect('schedule_builder:profile', user_form.username)
+
+        for error in list(form.errors.values()):
+            messages.error(request, error)
+
+    user = get_user_model().objects.filter(username=username).first()
+    if user:
+        form = UserUpdateForm(instance=user)
+        form.fields['description'].widget.attrs = {'rows': 1}
+        return render(request, 'tutor_base.html', context={'form': form})
+    return render(request, 'tutor_base.html')
 
 @login_required
 def index(request):  

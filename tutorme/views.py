@@ -3,6 +3,11 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib.auth import get_user_model
+from .forms import UserUpdateForm
+from .models import AppUser
+from django.contrib import messages
+from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .models import AppUser, CourseAsText
@@ -68,6 +73,12 @@ class StudentProfileView(generic.ListView):
     template_name = 'tutorme/studentprofile.html'
     def get_queryset(self):
         return
+        """
+ 
+class StudentProfileView(generic.CreateView):   
+    model = AppUser
+    template_name = 'tutorme/studentprofile.html'
+    fields = ['first_name', 'last_name', 'year', 'major', 'description']
 
 class CourseSearchView(generic.ListView):
     template_name = 'tutorme/course_search.html'
