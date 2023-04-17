@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from schedule_builder.models import Events
 from tutorme.models import AppUser
 
-from .forms import AddClass
+# from .forms import AddClass
 from .forms import UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages

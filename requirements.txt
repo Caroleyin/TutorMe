@@ -4,4 +4,4 @@ django-heroku
 django-bootstrap-v5
 django-allauth
 importlib-metadata
-crispy_forms
+django-crispy-forms
