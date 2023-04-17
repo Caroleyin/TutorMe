@@ -18,11 +18,24 @@ class AuthView(generic.ListView):
     template_name = 'tutorme/auth.html'
     def get_queryset(self):
         return
-    
+
+
+class SearchForTutor(generic.ListView):
+    template_name = 'tutorme/searchForTutor.html'
+    context_object_name = 'tutors'
+
+    def get_queryset(self):
+        course_title = self.request.GET.get('course', '')
+        course = CourseAsText.objects.filter(title=course_title).first()
+        if course:
+            return AppUser.objects.filter(is_tutor=True, courses=course)
+        else:
+            return None
 class StudentView(generic.ListView):
     template_name = 'tutorme/student.html'
+    context_object_name = 'courses'
     def get_queryset(self):
-        return
+        return self.request.user.courses.all()
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
             text = request.body.decode('utf-8')

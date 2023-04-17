@@ -12,5 +12,6 @@ urlpatterns = [
     path('student/', views.StudentView.as_view(), name='student'),
     path('student/schedule/', include('schedule_builder.urls')),
     path('student/profile/', views.StudentProfileView.as_view(), name='studentprofile'),
+    path('student/search/', views.SearchForTutor.as_view(), name='searchForTutor'),
     path('about/', views.AboutView.as_view(), name='about'),
 ]
