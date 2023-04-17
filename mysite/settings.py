@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'tutorme.apps.TutormeConfig',
     'schedule_builder.apps.ScheduleBuilderConfig',
-    'crispy_forms'
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
