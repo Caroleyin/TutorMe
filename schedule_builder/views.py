@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse 
 from schedule_builder.models import Events
 from tutorme.models import AppUser
+
 from .forms import AddClass
 from .forms import UserUpdateForm
 from django.contrib.auth.decorators import login_required
@@ -14,25 +15,25 @@ from schedule_builder.models import Requests
 from schedule_builder.models import Schedule
 from tutorme.models import StudentProfile
 
+from .forms import UserUpdateForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 @login_required
 def profile(request):
 	if request.method == 'POST':
 		u_form = UserUpdateForm(request.POST, instance=request.user)
-		p_form = ProfileUpdateForm(request.POST, request.FILES, instance=TutorProfile.objects.filter(user = request.user).first())
 
-		if u_form.is_valid() and p_form.is_valid():
+		if u_form.is_valid():
 			u_form.save()
-			p_form.save()
 			messages.success(request, f'Your account has been updated!')
 			return redirect('schedule_builder:tutor')
 	else:
 		u_form = UserUpdateForm(instance=request.user)
-		p_form = ProfileUpdateForm(instance=TutorProfile.objects.filter(user = request.user).first())
 
 	context = {
 		'u_form': u_form,
-		'p_form': p_form
 	}
 
 	return render(request, 'tutor_base.html', context)
@@ -53,6 +54,7 @@ def index(request, user_id):
         s.save()
 
     all_events = Events.objects.filter(schedule=Schedule.objects.get(user = AppUser.objects.get(pk = request.user.id)))
+    
     context = {
         "tutor_id":user_id,
         "events":all_events,
@@ -89,8 +91,15 @@ def add_event(request):
     start = request.GET.get("start", None)
     end = request.GET.get("end", None)
     title = request.GET.get("title", None)
+
     # change name=request.user.id if needed (to the unique identifer)
     event = Events(name=str(title), start=start, end=end, schedule=Schedule.objects.get(user=AppUser.objects.get(pk = request.user.id)))
+
+    # tutor = request.user
+    # newtitle = str(title) + '\n' + 'Hourly Rate: $' + str(tutor.hourly_rate)
+    # event = Events(name=newtitle, start=start, end=end)
+    # event.tutor = tutor
+
     event.save()
     data = {}
     return JsonResponse(data)
