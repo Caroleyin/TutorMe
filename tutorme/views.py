@@ -26,6 +26,10 @@ class AuthView(generic.ListView):
     def get_queryset(self):
         return
 
+class AboutView(generic.ListView):
+    template_name = 'tutorme/about.html'
+    def get_queryset(self):
+        return
 
 class SearchForTutor(generic.ListView):
     template_name = 'tutorme/searchForTutor.html'
@@ -95,7 +99,7 @@ def userpage(request):
 	profile_form = ProfileForm(instance=request.user.profile)
 	return render(request=request, template_name="tutorme/studentprofile.html", context={"user":request.user, "user_form":user_form, "profile_form":profile_form })
 
-
+"""
 def profile(request, username):
     if request.method == 'POST':
         user = request.user
@@ -115,3 +119,4 @@ def profile(request, username):
         form.fields['description'].widget.attrs = {'rows': 1}
         return render(request, 'tutorme/studentprofile.html', context={'form': form})
     return render(request, 'tutorme/studentprofile.html')
+    

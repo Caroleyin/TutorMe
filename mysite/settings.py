@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
+    'tutorme.apps.TutormeConfig',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
