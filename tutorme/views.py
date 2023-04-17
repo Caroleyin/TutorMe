@@ -8,6 +8,12 @@ from .forms import UserUpdateForm
 from .models import AppUser
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from .models import AppUser, CourseAsText
+from django.shortcuts import redirect
+from django.contrib.auth import get_user_model
+from .forms import UserUpdateForm
 
 class IndexView(generic.ListView):
     template_name = 'tutorme/index.html'
@@ -19,14 +25,52 @@ class AuthView(generic.ListView):
     template_name = 'tutorme/auth.html'
     def get_queryset(self):
         return
-    
+
+
+class SearchForTutor(generic.ListView):
+    template_name = 'tutorme/searchForTutor.html'
+    context_object_name = 'tutors'
+
+    def get_queryset(self):
+        course_title = self.request.GET.get('course', '')
+        course = CourseAsText.objects.filter(title=course_title).first()
+        if course:
+            return AppUser.objects.filter(is_tutor=True, courses=course)
+        else:
+            return None
 class StudentView(generic.ListView):
     template_name = 'tutorme/student.html'
+    context_object_name = 'courses'
     def get_queryset(self):
-        return
-"""
+        return self.request.user.courses.all()
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            text = request.body.decode('utf-8')
+
+            text = text[93:]
+            ampIndex = text.find('&')
+            text = text[:ampIndex]
+            text = text.replace('+', ' ')
+            print(text)
+            if text:
+                user_profile = request.user
+
+                course = CourseAsText.objects.filter(title=text).first()
+                if (course is None):
+                    course = CourseAsText.objects.create(title=text)
+
+                findClass = user_profile.courses.filter(pk=course.pk).first()
+                if (findClass is None):
+                    findClass = course
+
+                user_profile.courses.add(findClass)
+                user_profile.save()
+
+                return redirect('/tutorme/student/')
+        return JsonResponse({'status': 'error'})
+
 class StudentProfileView(generic.ListView):
-    template_name = 'tutorme/profile.html'
+    template_name = 'tutorme/studentprofile.html'
     def get_queryset(self):
         return
         """
@@ -46,12 +90,11 @@ class AboutView(generic.ListView):
     def get_queryset(self):
         return
 
-"""
 def userpage(request):
 	user_form = CustomSignupForm(instance=request.user)
 	profile_form = ProfileForm(instance=request.user.profile)
 	return render(request=request, template_name="tutorme/studentprofile.html", context={"user":request.user, "user_form":user_form, "profile_form":profile_form })
-"""
+
 
 def profile(request, username):
     if request.method == 'POST':
@@ -61,7 +104,7 @@ def profile(request, username):
             user_form = form.save()
 
             messages.success(request, f'{user_form}, Your profile has been updated!')
-            return redirect('tutorme:profile', user_form.username)
+            return redirect('profile', user_form.username)
 
         for error in list(form.errors.values()):
             messages.error(request, error)
@@ -72,23 +115,3 @@ def profile(request, username):
         form.fields['description'].widget.attrs = {'rows': 1}
         return render(request, 'tutorme/studentprofile.html', context={'form': form})
     return render(request, 'tutorme/studentprofile.html')
-    
-"""
-def profile(request):
-	if request.method == 'POST':
-		u_form = UserUpdateForm(request.POST, instance=request.user)
-
-		if u_form.is_valid():
-			u_form.save()
-			messages.success(request, f'Your account has been updated!')
-			return redirect('tutorme:StudentProfileView')
-	else:
-		u_form = UserUpdateForm(instance=request.user)
-
-	context = {
-		'u_form': u_form,
-	}
-
-	return render(request, 'tutorme/studentprofile.html', context)
-    """
-    

@@ -25,14 +25,13 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-tav%qb=g1$3emx
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-DEBUG = True
-ALLOWED_HOSTS = ['localhost:8000', '127.0.0.1', 'https://tutorme-project-a-14.herokuapp.com/']
+DEBUG = False
+ALLOWED_HOSTS = ['localhost:8000', '127.0.0.1', 'tutorme-project-a-14.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'tutorme.apps.TutormeConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -137,12 +136,13 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SITE_ID = 4
+SITE_ID = 13
 
 AUTH_USER_MODEL = 'tutorme.AppUser'
 
@@ -161,6 +161,7 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_LOGOUT_ON_GET= True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 SOCIALACCOUNT_AUTO_SIGNUP = False
 SOCIALACCOUNT_FORMS = {'signup': 'tutorme.forms.CustomSignupForm'}
@@ -176,3 +177,13 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+# Activate Django-Heroku.
+# Use this code to avoid the psycopg2 / django-heroku error!  
+# Do NOT import django-heroku above!
+try:
+    if 'HEROKU' in os.environ:
+        import django_heroku
+        django_heroku.settings(locals())
+except ImportError:
+    found = False

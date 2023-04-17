@@ -23,3 +23,6 @@ class Course(models.Model):
     start_time = models.CharField(max_length=200)
     end_time = models.CharField(max_length=200)
 
+
+class CourseAsText(models.Model):
+    title = models.CharField(max_length=100)
