@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-tav%qb=g1$3emx
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['localhost:8000', '127.0.0.1', 'tutorme-project-a-14.herokuapp.com']
 
 
@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'tutorme.apps.TutormeConfig',
-    'schedule_builder.apps.ScheduleBuilderConfig'
+    'schedule_builder.apps.ScheduleBuilderConfig',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -135,12 +136,13 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SITE_ID = 10
+SITE_ID = 13
 
 AUTH_USER_MODEL = 'tutorme.AppUser'
 
@@ -151,10 +153,13 @@ LOGOUT_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_LOGOUT_ON_GET= True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 SOCIALACCOUNT_AUTO_SIGNUP = False
 SOCIALACCOUNT_FORMS = {'signup': 'tutorme.forms.CustomSignupForm'}

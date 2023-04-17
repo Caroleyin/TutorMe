@@ -7,6 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .models import AppUser, CourseAsText
 from django.shortcuts import redirect
+from django.contrib.auth import get_user_model
+from .forms import UserUpdateForm
 
 class IndexView(generic.ListView):
     template_name = 'tutorme/index.html'
@@ -63,7 +65,7 @@ class StudentView(generic.ListView):
         return JsonResponse({'status': 'error'})
 
 class StudentProfileView(generic.ListView):
-    template_name = 'tutorme/profile.html'
+    template_name = 'tutorme/studentprofile.html'
     def get_queryset(self):
         return
 
@@ -76,3 +78,29 @@ class AboutView(generic.ListView):
     template_name = 'tutorme/about.html'
     def get_queryset(self):
         return
+
+def userpage(request):
+	user_form = CustomSignupForm(instance=request.user)
+	profile_form = ProfileForm(instance=request.user.profile)
+	return render(request=request, template_name="tutorme/studentprofile.html", context={"user":request.user, "user_form":user_form, "profile_form":profile_form })
+
+
+def profile(request, username):
+    if request.method == 'POST':
+        user = request.user
+        form = UserUpdateForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            user_form = form.save()
+
+            messages.success(request, f'{user_form}, Your profile has been updated!')
+            return redirect('profile', user_form.username)
+
+        for error in list(form.errors.values()):
+            messages.error(request, error)
+
+    user = get_user_model().objects.filter(username=username).first()
+    if user:
+        form = UserUpdateForm(instance=user)
+        form.fields['description'].widget.attrs = {'rows': 1}
+        return render(request, 'tutorme/studentprofile.html', context={'form': form})
+    return render(request, 'tutorme/studentprofile.html')

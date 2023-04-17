@@ -12,7 +12,7 @@ class AppUser(AbstractUser):
 
 class StudentProfile(models.Model):
     user = models.OneToOneField(AppUser, on_delete=models.CASCADE, primary_key = True)
-
+    courses = models.ManyToManyField(Course)
     @receiver(post_save, sender=AppUser)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
@@ -33,6 +33,12 @@ class TutorProfile(models.Model):
     # @receiver(post_save, sender=AppUser)
     #  def save_user_profile(sender, instance, **kwargs):
     #     instance.profile.save()
+    
+    year = models.CharField("Year", max_length=4, default='', blank=True)
+    major = models.CharField("Major(s)/minor(s)", max_length=100, default='', blank=True)
+    description = models.TextField("Description", max_length=600, default='', blank=True)
+    hourly_rate = models.FloatField(default=0)
+
 
 class Course(models.Model):
     title = models.CharField(max_length=100)
@@ -43,6 +49,7 @@ class Course(models.Model):
     meeting_days = models.CharField(max_length=10)
     start_time = models.CharField(max_length=200)
     end_time = models.CharField(max_length=200)
+
 
 class CourseAsText(models.Model):
     title = models.CharField(max_length=100)

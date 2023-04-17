@@ -1,5 +1,6 @@
 from django.db import models
-from tutorme.models import TutorProfile
+
+from tutorme.models import AppUser
  
 # Create your models here.
 class Events(models.Model):
@@ -7,4 +8,4 @@ class Events(models.Model):
     name = models.CharField(max_length=255,null=True,blank=True)
     start = models.DateTimeField(null=True,blank=True)
     end = models.DateTimeField(null=True,blank=True)
-    tutor = models.ForeignKey(TutorProfile, on_delete=models.CASCADE, default=None)
+    tutor = models.ForeignKey(AppUser, on_delete=models.CASCADE, default=None)
