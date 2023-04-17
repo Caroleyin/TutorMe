@@ -10,4 +10,7 @@ urlpatterns = [
     path('add_event/', views.add_event, name='add_event'), 
     path('update/', views.update, name='update'),
     path('remove/', views.remove, name='remove'),
+    #path('tutor/', views.profile, name='tutor'),
+    path('tutor/<username>', views.profile, name='profile'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='tutorme/index.html'), name='logout')
 ]

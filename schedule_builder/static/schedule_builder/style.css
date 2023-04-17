@@ -1,0 +1,14 @@
+.profilecontainer {
+  display: grid;
+  padding: 2rem;
+  grid-template-columns: min-content 1fr;
+  gap: 1rem;
+  margin: 0 auto;
+  font: 500 100%/1.5 system-ui;
+}
+img {
+  max-width: 150px;
+  height: auto;
+}
+
+.profilecontainer .rate { float:right }

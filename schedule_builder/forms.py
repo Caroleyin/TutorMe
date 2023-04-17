@@ -1,5 +1,7 @@
 from django import forms 
 
-class AddClass(forms.Form):
-    class_name = forms.CharField(label='CS', max_length=100)
-    class_num = forms.CharField(label='2150', max_length=10)
+class UserUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = AppUser
+        fields = ['first_name', 'last_name', 'year', 'major', 'description','hourly_rate'] 

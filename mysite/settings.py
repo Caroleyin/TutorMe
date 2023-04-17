@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-tav%qb=g1$3emx
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 DEBUG = True
-ALLOWED_HOSTS = ['localhost:8000', '127.0.0.1', 'tutorme-project-a-14.herokuapp.com']
+ALLOWED_HOSTS = ['localhost:8000', '127.0.0.1', 'https://tutorme-project-a-14.herokuapp.com/']
 
 
 # Application definition
@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'tutorme.apps.TutormeConfig',
-    'schedule_builder.apps.ScheduleBuilderConfig'
+    'schedule_builder.apps.ScheduleBuilderConfig',
+    'crispy_forms',
+    'crispy_bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -151,6 +153,10 @@ LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_EMAIL_VERIFICATION = "none"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_LOGOUT_ON_GET= True
