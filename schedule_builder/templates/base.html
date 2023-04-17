@@ -71,7 +71,7 @@
                       </li>
                         
                         <li style="padding-top: 2rem;"> 
-                          <a href="{% url 'schedule_builder:schedule_index' %}" class="nav-link active" aria-current="page">
+                          <a href="{% url 'schedule_builder:schedule_index'  user_id=tutor_id%}" class="nav-link active" aria-current="page">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                             Schedule
                           </a>
@@ -96,7 +96,7 @@
                             <span class="d-none d-sm-inline mx-1">{{user}}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li><a class="dropdown-item" href="{% url 'schedule_builder:schedule_index' %}">Schedule</a></li>
+                            <li><a class="dropdown-item" href="{% url 'schedule_builder:schedule_index' user_id=tutor_id%} ">Schedule</a></li>
                             <li><a class="dropdown-item" href="{% url 'schedule_builder:tutor' %}">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -143,112 +143,11 @@
     </div>
   </footer>
 
-<script>
-  function addClass() {
-    console.log("hello");
-  }
-</script>
 
-<script>
-   $(document).ready(function () {
-       var calendar = $('#calendar').fullCalendar({
-           header: {
-               left: 'prev,next today',
-               center: 'title',
-               right: 'agendaWeek,agendaDay, month',
-           },
-           events: 'all_events',
-           defaultView: 'agendaWeek',
-	   selectable: true,
-           selectHelper: true,
-           editable: true,
-           eventLimit: true,
-           select: function (start, end, allDay) {
-               var title = prompt("Add your Timeslot: ");
-               //STAT 2020
-               if (title) {
-                   // var clist = title.split(" ");
-                   // let url = 'https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1238&page=1'
-                   // window.location.href = (url + '&subject=' + clist[0] + '&catalog_nbr=' + clist[1]);
-                   var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
-                   var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
-                   $.ajax({
-                       type: "GET",
-                       url: 'add_event',
-                       data: {'title': title, 'start': start, 'end': end},
-                       dataType: "json",
-                       success: function (data) {
-                           calendar.fullCalendar('refetchEvents');
-                           alert("Added Successfully");
-                       },
-                       error: function (data) {
-                           alert('There is a problem!!!');
-                       }
-                   });
-               }
-           },
-           eventResize: function (event) {
-               var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-               var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-               var title = event.title;
-               var id = event.id;
-               $.ajax({
-                   type: "GET",
-                   url: 'update',
-                   data: {'title': title, 'start': start, 'end': end, 'id': id},
-                   dataType: "json",
-                   success: function (data) {
-                       calendar.fullCalendar('refetchEvents');
-                       alert('Event Update');
-                   },
-                   error: function (data) {
-                       alert('There is a problem!!!');
-                   }
-               });
-           },
- 
-           eventDrop: function (event) {
-               var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-               var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-               var title = event.title;
-               var id = event.id;
-               $.ajax({
-                   type: "GET",
-                   url: 'update',
-                   data: {'title': title, 'start': start, 'end': end, 'id': id},
-                   dataType: "json",
-                   success: function (data) {
-                       calendar.fullCalendar('refetchEvents');
-                       alert('Event Update');
-                   },
-                   error: function (data) {
-                       alert('There is a problem!!!');
-                   }
-               });
-           },
- 
-           eventClick: function (event) {
-               if (confirm("Are you sure you want to remove it?")) {
-                   var id = event.id;
-                   $.ajax({
-                       type: "GET",
-                       url: 'remove',
-                       data: {'id': id},
-                       dataType: "json",
-                       success: function (data) {
-                           calendar.fullCalendar('refetchEvents');
-                           alert('Event Removed');
-                       },
-                       error: function (data) {
-                           alert('There is a problem!!!');
-                       }
-                   });
-               }
-           },
- 
-       });
-   });
-</script>
+
+{% block script %}
+
+{% endblock %}
 
 </body>
 </html>
