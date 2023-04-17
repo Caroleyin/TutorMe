@@ -11,8 +11,6 @@ from .forms import UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from .forms import AddClass
-
 """
 @login_required
 

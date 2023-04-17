@@ -1,4 +1,5 @@
 from django import forms 
+from tutorme.models import AppUser
 
 class UserUpdateForm(forms.ModelForm):
 

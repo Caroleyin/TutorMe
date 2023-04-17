@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'tutorme.apps.TutormeConfig',
     'schedule_builder.apps.ScheduleBuilderConfig',
     'crispy_forms',
     'crispy_bootstrap5'
