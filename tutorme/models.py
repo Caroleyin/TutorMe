@@ -12,7 +12,6 @@ class AppUser(AbstractUser):
     major = models.CharField("Major(s)/minor(s)", max_length=100, default='', blank=True)
     description = models.TextField("Description", max_length=600, default='', blank=True)
     hourly_rate = models.FloatField(default=0)
-    courses = models.ManyToManyField('CourseAsText', blank=True)
 
 class Course(models.Model):
     title = models.CharField(max_length=100)
