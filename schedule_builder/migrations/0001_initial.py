@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(blank=True, max_length=255, null=True)),
                 ('start', models.DateTimeField(blank=True, null=True)),
                 ('end', models.DateTimeField(blank=True, null=True)),
+                ('tutor', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
