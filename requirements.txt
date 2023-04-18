@@ -5,4 +5,4 @@ django-bootstrap-v5
 django-allauth
 importlib-metadata
 django-crispy-forms
-crispy-boostrap5
+crispy-boostrap5-0.7
