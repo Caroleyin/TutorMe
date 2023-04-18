@@ -170,6 +170,11 @@ SOCIALACCOUNT_FORMS = {'signup': 'tutorme.forms.CustomSignupForm'}
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
+        'APP': {
+            'client_id': '420365373933-js60l217527bk08h9p3d0g9uah0lsed9.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
         'SCOPE': [
             'profile',
             'email',
