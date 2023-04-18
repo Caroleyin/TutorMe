@@ -6,3 +6,4 @@ django-allauth
 importlib-metadata
 django-crispy-forms
 crispy-bootstrap5
+dj-database-url
