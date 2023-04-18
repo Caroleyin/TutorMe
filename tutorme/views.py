@@ -3,6 +3,11 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib.auth import get_user_model
+from .forms import UserUpdateForm
+from .models import AppUser
+from django.contrib import messages
+from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .models import AppUser, CourseAsText
@@ -24,6 +29,10 @@ class AuthView(generic.ListView):
     def get_queryset(self):
         return
 
+class AboutView(generic.ListView):
+    template_name = 'tutorme/about.html'
+    def get_queryset(self):
+        return
 
 class SearchForTutor(generic.ListView):
     template_name = 'tutorme/searchForTutor.html'
@@ -71,6 +80,12 @@ class StudentProfileView(generic.ListView):
     template_name = 'tutorme/studentprofile.html'
     def get_queryset(self):
         return
+        """
+ 
+class StudentProfileView(generic.CreateView):   
+    model = AppUser
+    template_name = 'tutorme/studentprofile.html'
+    fields = ['first_name', 'last_name', 'year', 'major', 'description']
 
 class CourseSearchView(generic.ListView):
     template_name = 'tutorme/course_search.html'
@@ -86,21 +101,9 @@ def userpage(request):
 	user_form = CustomSignupForm(instance=request.user)
 	profile_form = ProfileForm(instance=request.user.profile)
 	return render(request=request, template_name="tutorme/studentprofile.html", context={"user":request.user, "user_form":user_form, "profile_form":profile_form })
+"""
 
 
-def all_requests(request):
-    # all_requests = Requests.objects.all()
-    all_requests = Requests.objects.filter(tutor_id=request.user.id) | Requests.objects.filter(student_id=request.user.id)
-    out = []                                                                                                             
-    for req in all_requests:                                                                          
-        out.append({                                                                                            
-            'start': req.start_time.strftime("%m/%d/%Y, %H:%M:%S"),                                                         
-            'end': req.end_time.strftime("%m/%d/%Y, %H:%M:%S"),      
-            'student': req.student_id,
-            'tutor': req.tutor_id,
-            'accepted': req.accepted,
-        })                                                                                                                                                                                                                  
-    return JsonResponse(out, safe=False)
 
 def profile(request, username):
     if request.method == 'POST':
@@ -121,3 +124,17 @@ def profile(request, username):
         form.fields['description'].widget.attrs = {'rows': 1}
         return render(request, 'tutorme/studentprofile.html', context={'form': form})
     return render(request, 'tutorme/studentprofile.html')
+
+def all_requests(request):
+    # all_requests = Requests.objects.all()
+    all_requests = Requests.objects.filter(tutor_id=request.user.id) | Requests.objects.filter(student_id=request.user.id)
+    out = []                                                                                                             
+    for req in all_requests:                                                                          
+        out.append({                                                                                            
+            'start': req.start_time.strftime("%m/%d/%Y, %H:%M:%S"),                                                         
+            'end': req.end_time.strftime("%m/%d/%Y, %H:%M:%S"),      
+            'student': req.student_id,
+            'tutor': req.tutor_id,
+            'accepted': req.accepted,
+        })                                                                                                                                                                                                                  
+    return JsonResponse(out, safe=False)
