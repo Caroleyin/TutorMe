@@ -158,9 +158,6 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-
-CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_LOGOUT_ON_GET= True
@@ -173,6 +170,11 @@ SOCIALACCOUNT_FORMS = {'signup': 'tutorme.forms.CustomSignupForm'}
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
+        'APP': {
+            'client_id': '420365373933-js60l217527bk08h9p3d0g9uah0lsed9.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
         'SCOPE': [
             'profile',
             'email',
