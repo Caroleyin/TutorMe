@@ -32,19 +32,19 @@ ALLOWED_HOSTS = ['localhost:8000', '127.0.0.1', 'tutorme-project-a-14.herokuapp.
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'bootstrap5',
     'django.contrib.admin',
-    'django.contrib.auth',
     'tutorme.apps.TutormeConfig',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
     'schedule_builder.apps.ScheduleBuilderConfig',
     'crispy_forms',
     'crispy_bootstrap5'
@@ -173,6 +173,11 @@ SOCIALACCOUNT_FORMS = {'signup': 'tutorme.forms.CustomSignupForm'}
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
+        'APP': {
+            'client_id': '420365373933-js60l217527bk08h9p3d0g9uah0lsed9.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
         'SCOPE': [
             'profile',
             'email',
