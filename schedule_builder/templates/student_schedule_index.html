@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+   
+{% block title %}Python Django Ajax FullCalender CRUD (Create, Read, Update and Delete){% endblock title %}
+   
+{% block content %}
+<div class="col-md-12">    
+    <div id="calendar"></div> 
+</div> 
+{% endblock content %} 
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+        var calendar = $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay',
+            },
+            events: '{{tutor_id}}/all_events',
+        selectable: true,
+            selectHelper: false,
+            editable: false,
+            eventLimit: true,
+            eventClick: function (event) {
+               if (confirm("Request a tutoring session?")) {
+                   var id = event.id;
+                   var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+                   var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+                   var title = event.title;
+                   var user_id = '{{tutor_id}}'
+
+                //    var token =  $('input[name="csrfToken"]').attr('value')
+                //     $.ajaxSetup({
+                //         beforeSend: function(xhr) {
+                //             xhr.setRequestHeader('Csrf-Token', token);
+                //         }
+                //     });
+
+                   $.ajax({
+                       type: "GET",
+                       url: user_id + '/request_tutor/',
+                       data: {'title': title, 'start': start, 'end': end, 'id': id},
+                       dataType: "json",
+                       // editable: "",
+                       success: function (data) {
+                           calendar.fullCalendar('refetchEvents');
+                           alert('Tutor requested!');
+                       },
+                       error: function (data) {
+                           alert('There is a problem!!!');
+                       }
+                   });
+               }
+           },
+
+
+  
+        });
+    });
+ </script>
+{% endblock script %}

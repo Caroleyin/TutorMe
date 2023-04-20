@@ -7,6 +7,16 @@ from schedule_builder.models import Events
 from tutorme.models import AppUser
 from django.views import generic
 from django.contrib.auth import get_user_model
+
+# from .forms import AddClass
+from .forms import UserUpdateForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+from schedule_builder.models import Requests
+from schedule_builder.models import Schedule
+# from tutorme.models import StudentProfile
+
 from .forms import UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -59,16 +69,32 @@ def profile(request, username):
     return render(request, 'tutor_base.html')
 
 @login_required
-def index(request):  
-    all_events = Events.objects.filter(tutor = request.user)
+def index(request, user_id):
+    # if the visiting user isn't the the same user as the user whose schedule they're viewing
+    if (request.user.id != user_id):
+        all_events = Events.objects.filter(schedule=Schedule.objects.get(user = AppUser.objects.get(pk = user_id)))
+        context = {
+            "tutor_id":user_id,
+            "events":all_events,
+        }
+        return render(request,'student_schedule_index.html',context)
+
+    if not Schedule.objects.filter(user = AppUser.objects.get(pk=request.user.id)):
+        s = Schedule(user = AppUser.objects.get(pk=request.user.id)) 
+        s.save()
+
+    all_events = Events.objects.filter(schedule=Schedule.objects.get(user = AppUser.objects.get(pk = request.user.id)))
+    
     context = {
+        "tutor_id":user_id,
         "events":all_events,
     }
     return render(request,'schedule_index.html',context)
  
 @login_required
-def all_events(request):                                                                                                 
-    all_events = Events.objects.filter(tutor = request.user)                                                                                    
+def all_events(request, user_id):                                                                                                 
+    # all_events = Events.objects.filter(tutor = TutorProfile.objects.filter(user = request.user).first())    
+    all_events = Events.objects.filter(schedule=Schedule.objects.get(pk = user_id))                                                                                 
     out = []                                                                                                             
     for event in all_events:                                                                                             
         out.append({                                                                                                     
@@ -82,13 +108,28 @@ def all_events(request):
  
 @login_required
 def add_event(request):
+    # start = request.GET.get("start", None)
+    # end = request.GET.get("end", None)
+    # title = request.GET.get("title", None)
+    # tutor = StudentProfile.objects.filter(user = request.user).first()
+    # newtitle = str(title) + '\n' + 'Hourly Rate: $' + str(tutor.hourly_rate)
+    # event = Events(name=newtitle, start=start, end=end)
+    # event.tutor = AppUser.objects.filter(user = request.user).first()
+    # event.save()
+    # data = {}
+    # return JsonResponse(data)
     start = request.GET.get("start", None)
     end = request.GET.get("end", None)
     title = request.GET.get("title", None)
-    tutor = request.user
-    newtitle = str(title) + '\n' + 'Hourly Rate: $' + str(tutor.hourly_rate)
-    event = Events(name=newtitle, start=start, end=end)
-    event.tutor = tutor
+
+    # change name=request.user.id if needed (to the unique identifer)
+    event = Events(name=str(title), start=start, end=end, schedule=Schedule.objects.get(user=AppUser.objects.get(pk = request.user.id)))
+
+    # tutor = request.user
+    # newtitle = str(title) + '\n' + 'Hourly Rate: $' + str(tutor.hourly_rate)
+    # event = Events(name=newtitle, start=start, end=end)
+    # event.tutor = tutor
+
     event.save()
     data = {}
     return JsonResponse(data)
@@ -115,3 +156,17 @@ def remove(request):
     data = {}
     return JsonResponse(data)
 
+@login_required
+def request_tutor(request, user_id):
+    if request.method == "GET":
+        title = request.GET.get("title", None)
+        start = request.GET.get("start", None)
+        end = request.GET.get("end", None)
+        student = request.user.id
+        tutor = user_id
+        request = Requests(event_title = title, start_time = start, end_time = end, student_id = student, tutor_id = tutor)
+        request.save()
+        data = {}
+        return JsonResponse(data)
+        # request_list = Requests.objects.all()
+        # return render(request, 'request/list.html', {'comment_list': request_list})

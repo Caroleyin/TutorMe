@@ -19,4 +19,5 @@ urlpatterns = [
     path('student/<username>', views.StudentProfileView.as_view(), name='studentprofile'),
 
     path('about/', views.AboutView.as_view(), name='about'),
+    path('requests/', views.all_requests, name='requests'),
 ]
