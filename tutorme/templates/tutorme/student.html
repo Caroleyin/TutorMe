@@ -90,54 +90,53 @@
                 </div>
             </div>
             <div class="col py-3">
-                {Student} Content area...
+                {Tutor} Content area...
+
+                <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
+                  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                    <div class="container-fluid">
+                      <button class="navbar-toggler" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+              
+                      <div class="collapse navbar-collapse d-lg-flex justify-content-between">
+                        <a class="navbar-brand col-lg-3 me-0" href="#">TutorMe</a>
+                          <form class="form-inline">
+                              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            </form>
+                        <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+                          <button class="btn btn-outline-secondary rounded-pill text-white px-4">{{ user }}</button>
+                        </div>
+                      </div>
+                    </div>
+                  </nav>
+              
+              
+                    <div class ="main">
+                      <form method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="my_text" id="my-text">
+                        <button type="submit" name="save_text">Save</button>
+                      </form>
+              
+                        {% if courses %}
+                          <ul>
+                              {% for course in courses %}
+                                  <li>{{ course.title }}</li>
+                              {% endfor %}
+                          </ul>
+                        {% else %}
+                          <p>No courses found.</p>
+                        {% endif %}
+                    </div>
+              
+                </body>
             </div>
         </div>
     </div>
     </section>
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
-  </body>
-
-
-  <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse d-lg-flex justify-content-between">
-          <a class="navbar-brand col-lg-3 me-0" href="#">TutorMe</a>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              </form>
-          <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-            <button class="btn btn-outline-secondary rounded-pill text-white px-4">{{ user }}</button>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-
-      <div class ="main">
-        <form method="POST">
-          {% csrf_token %}
-          <input type="text" name="my_text" id="my-text">
-          <button type="submit" name="save_text">Save</button>
-        </form>
-
-          {% if courses %}
-            <ul>
-                {% for course in courses %}
-                    <li>{{ course.title }}</li>
-                {% endfor %}
-            </ul>
-          {% else %}
-            <p>No courses found.</p>
-          {% endif %}
-      </div>
-
   </body>
 
 </html>
