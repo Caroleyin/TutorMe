@@ -38,6 +38,69 @@
   </svg>
 
   <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
+    <section class="main">
+      <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                <div class="d-flex flex-column align-items-center align-items-sm-start my-auto px-3 pt-2 text-white min-vh-100">
+                    <a href="/" class="d-flex align-items-center py-8 text-start text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline" style="padding-top: 1rem;">TutorMe</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-10 align-items-center align-items-sm-start justify-content-between" id="menu">
+                        <li class="nav-item p-6" style="padding-top: 2rem;">
+                          <a href="#" class="nav-link active" aria-current="page">
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#home"></use></svg>
+                            Home
+                          </a>
+                        </li>
+                        <li style="padding-top: 2rem;">
+                          <a href="#" class="nav-link text-white">
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
+                            Find a Tutor
+                          </a>
+                        </li>
+                        <li style="padding-top: 2rem;"> 
+                          <a href="/schedule" class="nav-link text-white">
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
+                            Schedule
+                          </a>
+                        </li>
+                        <li style="padding-top: 2rem;">
+                          <a href="{% url 'tutorme:profile' user.username %}" class="nav-link text-white">
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#people-circle"></use></svg>
+                            Profile
+                          </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">{{user}}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="{% url 'tutorme:profile' user.username %}">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col py-3">
+                {Student} Content area...
+            </div>
+        </div>
+    </div>
+    </section>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
+  </body>
+  
+
+  <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button">
