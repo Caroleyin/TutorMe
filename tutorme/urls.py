@@ -15,7 +15,7 @@ urlpatterns = [
 
     path('student/<username>', views.profile, name='profile'),
     
-    path('student/search/', views.SearchForTutor.as_view(), name='searchForTutor'),
+    path('search/', views.SearchForTutor.as_view(), name='searchForTutor'),
 
     path('about/', views.AboutView.as_view(), name='about'),
     path('requests/', views.all_requests, name='requests'),

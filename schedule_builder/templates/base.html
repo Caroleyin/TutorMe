@@ -79,7 +79,7 @@
                       </li>
                         <li style="padding-top: 2rem;"> 
 
-                          <a href="{% url 'schedule_builder:schedule_index'  user_id=tutor_id%}" class="nav-link active" aria-current="page">
+                          <a href="#" class="nav-link text-white">
 
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                             Schedule
@@ -87,9 +87,9 @@
                         </li>
 
                         <li style="padding-top: 2rem;">
-                          <a href="#" class="nav-link text-white">
+                          <a href="{% url 'schedule_builder:profile' user.username %}" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#people-circle"></use></svg>
-                            Requests
+                            Profile
                           </a>
                         </li>
                     </ul>
@@ -100,7 +100,7 @@
                             <span class="d-none d-sm-inline mx-1">{{user}}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li><a class="dropdown-item" href="{% url 'schedule_builder:schedule_index' user_id=tutor_id%} ">Schedule</a></li>
+                            <li><a class="dropdown-item" href="# ">Schedule</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
