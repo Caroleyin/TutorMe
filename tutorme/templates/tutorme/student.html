@@ -50,43 +50,12 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
               </form>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-            <button class="btn btn-outline-secondary rounded-pill text-white px-4">Name and Icon</button>
+            <button class="btn btn-outline-secondary rounded-pill text-white px-4">{{ user }}</button>
           </div>
         </div>
       </div>
     </nav>
 
-    <div class="sidebar">
-    <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 200px;">
-
-        <ul class="nav nav-pills flex-column mb-auto gap-4">
-          <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link link-dark">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link link-dark">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-              Schedule
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link link-dark">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-              Profile
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
 
       <div class ="main">
         <form method="POST">
@@ -166,7 +135,7 @@
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
-                          <a href="/tutorme/student/studentprofile" class="nav-link text-white">
+                          <a href="{% url 'tutorme:profile' user.username %}" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#people-circle"></use></svg>
                             Profile
                           </a>

@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
@@ -11,7 +11,6 @@ from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .models import AppUser, CourseAsText
-from django.shortcuts import redirect
 from django.contrib.auth import get_user_model
 from .forms import UserUpdateForm
 
@@ -76,10 +75,6 @@ class StudentView(generic.ListView):
                 return redirect('/tutorme/student/')
         return JsonResponse({'status': 'error'})
 
-class StudentProfileView(generic.ListView):
-    template_name = 'tutorme/studentprofile.html'
-    def get_queryset(self):
-        return
         """
  
 class StudentProfileView(generic.CreateView):   
@@ -104,7 +99,6 @@ def userpage(request):
 """
 
 
-
 def profile(request, username):
     if request.method == 'POST':
         user = request.user
@@ -113,7 +107,7 @@ def profile(request, username):
             user_form = form.save()
 
             messages.success(request, f'{user_form}, Your profile has been updated!')
-            return redirect('profile', user_form.username)
+            return redirect('tutorme:profile', user_form.username)
 
         for error in list(form.errors.values()):
             messages.error(request, error)
