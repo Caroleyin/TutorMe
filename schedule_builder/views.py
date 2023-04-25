@@ -167,3 +167,17 @@ def request_tutor(request, user_id):
         return JsonResponse(data)
         # request_list = Requests.objects.all()
         # return render(request, 'request/list.html', {'comment_list': request_list})
+
+def all_requests(request):
+    # all_requests = Requests.objects.all()
+    all_requests = Requests.objects.filter(tutor_id=request.user.id) | Requests.objects.filter(student_id=request.user.id)
+    out = []                                                                                                             
+    for req in all_requests:                                                                          
+        out.append({                                                                                            
+            'start': req.start_time.strftime("%m/%d/%Y, %H:%M:%S"),                                                         
+            'end': req.end_time.strftime("%m/%d/%Y, %H:%M:%S"),      
+            'student': req.student_id,
+            'tutor': req.tutor_id,
+            'accepted': req.accepted,
+        })                                                                                                                                                                                                                  
+    return JsonResponse(out, safe=False)
