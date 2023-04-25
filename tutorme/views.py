@@ -46,9 +46,16 @@ class SearchForTutor(generic.ListView):
             return None
 class StudentView(generic.ListView):
     template_name = 'tutorme/student.html'
+    def get_queryset(self):
+        return
+
+class TutorAddClassView(generic.ListView):
+    template_name = 'tutorme/tutorAddClasses.html'
     context_object_name = 'courses'
+
     def get_queryset(self):
         return self.request.user.courses.all()
+
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
             text = request.body.decode('utf-8')

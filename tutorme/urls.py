@@ -16,7 +16,7 @@ urlpatterns = [
     path('student/<username>', views.profile, name='profile'),
     
     path('search/', views.SearchForTutor.as_view(), name='searchForTutor'),
-
+    path('addClasses/', views.TutorAddClassView.as_view(), name='tutorAddClasses'),
     path('about/', views.AboutView.as_view(), name='about'),
     path('requests/', views.all_requests, name='requests'),
 ]

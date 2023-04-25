@@ -1,4 +1,3 @@
-<!-- templates/searchForTutord.html -->
 {% load static %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
@@ -7,12 +6,16 @@
 
 <!DOCTYPE html>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student</title>
+    <title>Tutor</title>
   </head>
 
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -49,9 +52,9 @@
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
-                          <a href="#" class="nav-link text-white">
+                          <a href="/tutorme/addClasses/" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
-                            Dashboard
+                            Add Your Classes
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
@@ -70,62 +73,62 @@
                     <hr>
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1"> {{ username }}</span>
+                            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">{{user}}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li><a class="dropdown-item" href="{% url 'tutorme:profile' user.username %}">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            <li><a class="dropdown-item" href="{% url 'schedule_builder:logout' %}">Sign out</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col py-3">
-                <form method="get">
-                    <label for="course">Search for tutors by course:</label>
-                    <input type="text" id="course" name="course" placeholder="Enter course title">
-                    <button type="submit">Search</button>
-                </form>
+                {Tutor} Content area...
 
-                {% if tutors %}
-                    <ul>
-                        {% for tutor in tutors %}
-                            <li>
-                                  <div class="container">
-                                  <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                      <div class="card">
-                                        <div class="card-body">
-                                          <div class="row">
-                                            <div class="col-md-6">
-                                              <h5 class="card-title text-muted mb-0">First name:</h5>
-                                              <p class="card-text mb-3">{{ tutor.first_name }}</p>
-                                            </div>
-                                            <div class="col-md-6">
-                                              <h5 class="card-title text-muted mb-0">Last name:</h5>
-                                              <p class="card-text mb-3">{{ tutor.last_name }}</p>
-                                            </div>
-                                          </div>
-                                          <div class="row justify-content-end">
-                                            <div class="col-md-3">
-                                              <a href="/tutorme/student/{{ tutor.username }}" class="btn btn-primary">View Tutor Profile</a>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
+                  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                    <div class="container-fluid">
+                      <button class="navbar-toggler" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
 
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No tutors found.</p>
-                {% endif %}
+                      <div class="collapse navbar-collapse d-lg-flex justify-content-between">
+                        <a class="navbar-brand col-lg-3 me-0" href="#">TutorMe</a>
+                          <form class="form-inline">
+                              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            </form>
+                        <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+                          <button class="btn btn-outline-secondary rounded-pill text-white px-4">{{ user }}</button>
+                        </div>
+                      </div>
+                    </div>
+                  </nav>
+
+
+                    <div class ="main">
+                      <form method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="my_text" id="my-text">
+                        <button type="submit" name="save_text">Save</button>
+                      </form>
+
+                        {% if courses %}
+                          <ul>
+                              {% for course in courses %}
+                                  <li>{{ course.title }}</li>
+                              {% endfor %}
+                          </ul>
+                        {% else %}
+                          <p>No courses found.</p>
+                        {% endif %}
+                    </div>
+
+                </body>
             </div>
         </div>
     </div>
@@ -134,5 +137,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>
 
-</html>
+<script>
+    $(document).ready(function() {
+      $('#save-button').click(function() {
+        var text = $('#exampleFormControlTextarea1').val();
+        $.ajax({
+          url: '/save_text/',
+          method: 'POST',
+          data: {'text': text},
+          success: function(response) {
+            console.log('Text saved!');
+          },
+          error: function(response) {
+            console.log('Error saving text!');
+          }
+        });
+      });
+    });
+</script>
 
+</html>
