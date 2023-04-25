@@ -126,16 +126,16 @@ def profile(request, username):
         return render(request, 'tutorme/studentprofile.html', context={'form': form, 'user_id': user.id})
     return render(request, 'tutorme/studentprofile.html')
 
-def all_requests(request):
-    # all_requests = Requests.objects.all()
-    all_requests = Requests.objects.filter(tutor_id=request.user.id) | Requests.objects.filter(student_id=request.user.id)
-    out = []                                                                                                             
-    for req in all_requests:                                                                          
-        out.append({                                                                                            
-            'start': req.start_time.strftime("%m/%d/%Y, %H:%M:%S"),                                                         
-            'end': req.end_time.strftime("%m/%d/%Y, %H:%M:%S"),      
-            'student': req.student_id,
-            'tutor': req.tutor_id,
-            'accepted': req.accepted,
-        })                                                                                                                                                                                                                  
-    return JsonResponse(out, safe=False)
+# def all_requests(request):
+#     # all_requests = Requests.objects.all()
+#     all_requests = Requests.objects.filter(tutor_id=request.user.id) | Requests.objects.filter(student_id=request.user.id)
+#     out = []                                                                                                             
+#     for req in all_requests:                                                                          
+#         out.append({                                                                                            
+#             'start': req.start_time.strftime("%m/%d/%Y, %H:%M:%S"),                                                         
+#             'end': req.end_time.strftime("%m/%d/%Y, %H:%M:%S"),      
+#             'student': req.student_id,
+#             'tutor': req.tutor_id,
+#             'accepted': req.accepted,
+#         })                                                                                                                                                                                                                  
+#     return JsonResponse(out, safe=False)

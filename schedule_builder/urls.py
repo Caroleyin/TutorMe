@@ -13,5 +13,7 @@ urlpatterns = [
     path('remove/', views.remove, name='remove'),
     #path('tutor/', views.profile, name='tutor'),
     path('tutor/<username>', views.profile, name='profile'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='tutorme/index.html'), name='logout')
+    path('logout/', auth_views.LogoutView.as_view(template_name='tutorme/index.html'), name='logout'),
+    path('requests/', views.all_requests, name='requests'),
+    path('<int:user_id>/request_tutor/', views.request_tutor, name='requests'),
 ]
