@@ -54,9 +54,9 @@
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
-                          <a href="#" class="nav-link text-white">
+                          <a href="/tutorme/addClasses/" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
-                            Find a Tutor
+                            Add Your Classes
                           </a>
                         </li>
                         <li style="padding-top: 2rem;"> 
@@ -110,25 +110,9 @@
                       </div>
                     </div>
                   </nav>
-              
-              
-                    <div class ="main">
-                      <form method="POST">
-                        {% csrf_token %}
-                        <input type="text" name="my_text" id="my-text">
-                        <button type="submit" name="save_text">Save</button>
-                      </form>
-              
-                        {% if courses %}
-                          <ul>
-                              {% for course in courses %}
-                                  <li>{{ course.title }}</li>
-                              {% endfor %}
-                          </ul>
-                        {% else %}
-                          <p>No courses found.</p>
-                        {% endif %}
-                    </div>
+
+
+
               
                 </body>
             </div>
@@ -185,7 +169,7 @@
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
-                          <a href="search" class="nav-link text-white">
+                          <a href="/tutorme/search/" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
                             Find a Tutor
                           </a>
@@ -229,25 +213,7 @@
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
   </body>
-  
-<script>
-    $(document).ready(function() {
-      $('#save-button').click(function() {
-        var text = $('#exampleFormControlTextarea1').val();
-        $.ajax({
-          url: '/save_text/',
-          method: 'POST',
-          data: {'text': text},
-          success: function(response) {
-            console.log('Text saved!');
-          },
-          error: function(response) {
-            console.log('Error saving text!');
-          }
-        });
-      });
-    });
-</script>
+
 
 </html>
 {% endif %}
