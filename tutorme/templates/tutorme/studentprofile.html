@@ -135,6 +135,15 @@
                 <button class="btn btn-outline-info" type="submit">Update</button>
             </div>
         {% endif %}
+
+        {% if user.username != form.instance.username %}
+
+          <div class="form-group">
+              <a href="/tutorme/student/schedule/{{user_id}}" class="btn btn-info" role="button">Go to schedule</a>
+              <!-- <button class="btn btn-outline-info" type="submit">Go to schedule</button> -->
+          </div>
+
+        {% endif %}
     </form>
   
   
