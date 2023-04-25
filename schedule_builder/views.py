@@ -18,7 +18,6 @@ from schedule_builder.models import Schedule
 from .forms import UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.shortcuts import redirect
 
 """
 @login_required

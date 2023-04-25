@@ -116,7 +116,7 @@ def profile(request, username):
     if user:
         form = UserUpdateForm(instance=user)
         form.fields['description'].widget.attrs = {'rows': 1}
-        return render(request, 'tutorme/studentprofile.html', context={'form': form})
+        return render(request, 'tutorme/studentprofile.html', context={'form': form, 'user_id': user.id})
     return render(request, 'tutorme/studentprofile.html')
 
 def all_requests(request):
