@@ -68,7 +68,7 @@
                         </a>
                       </li>
                       <li style="padding-top: 2rem;">
-                        <a href="#" class="nav-link active" aria-current="page">
+                        <a href="{% url 'tutorme:profile' user.username %}" class="nav-link active" aria-current="page">
                           <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#people-circle"></use></svg>
                           Profile
                         </a>
@@ -77,13 +77,12 @@
                   <hr>
                   <div class="dropdown pb-4">
                       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                          <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="hugenerd" width="30" height="30" class="rounded-circle">
                           <span class="d-none d-sm-inline mx-1">{{user}}</span>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                          <li><a class="dropdown-item" href="#">New project...</a></li>
-                          <li><a class="dropdown-item" href="#">Settings</a></li>
-                          <li><a class="dropdown-item" href="#">Profile</a></li>
+                          
+                          <li><a class="dropdown-item" href="{% url 'tutorme:profile' user.username %}">Profile</a></li>
                           <li>
                               <hr class="dropdown-divider">
                           </li>

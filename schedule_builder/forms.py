@@ -9,4 +9,4 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = AppUser
         # fields = ['username','last_name', 'first_name', 'email', 'year', 'major', 'description','hourly_rate'] 
-        fields = ['username','last_name', 'first_name', 'email', 'year', 'major', 'description'] 
+        fields = ['first_name', 'last_name', 'email', 'year', 'major', 'description', 'hourly_rate'] 
