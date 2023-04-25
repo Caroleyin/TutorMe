@@ -50,17 +50,18 @@
                   </a>
                   <ul class="nav nav-pills flex-column mb-sm-auto mb-10 align-items-center align-items-sm-start justify-content-between" id="menu">
                     <li class="nav-item p-6" style="padding-top: 2rem;">
-                      <a href="/tutorme/student" class="nav-link active" aria-current="page">
+                      <a href="/tutorme/student" class="nav-link text-white">
                         <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#home"></use></svg>
                         Home
                       </a>
                     </li>
+                    
                     <li style="padding-top: 2rem;">
-                      <a href="/tutorme/addClasses/" class="nav-link text-white">
+                      <a href="/tutorme/search/" class="nav-link text-white">
                         <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
-                        Add Your Classes
+                        Find a Tutor
                       </a>
-                    </li>
+                    </li> 
                     <li style="padding-top: 2rem;"> 
                       <a href="/tutorme/student/schedule/{{user.id}}" class="nav-link text-white">
                         <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
@@ -74,7 +75,7 @@
                       </a>
                     </li>
                     <li style="padding-top: 2rem;">
-                      <a href="{% url 'tutorme:profile' user.username %}" class="nav-link text-white">
+                      <a href="{% url 'tutorme:profile' user.username %}" class="nav-link active" aria-current="page">
                         <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#people-circle"></use></svg>
                         Profile
                       </a>

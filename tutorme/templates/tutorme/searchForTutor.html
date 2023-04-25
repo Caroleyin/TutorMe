@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student</title>
+    <title>Student - Find a Tutor</title>
   </head>
 
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -43,21 +43,27 @@
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-10 align-items-center align-items-sm-start justify-content-between" id="menu">
                         <li class="nav-item p-6" style="padding-top: 2rem;">
-                          <a href="#" class="nav-link active" aria-current="page">
+                          <a href="/" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#home"></use></svg>
                             Home
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
-                          <a href="#" class="nav-link text-white">
+                          <a href="/tutorme/search" class="nav-link active" aria-current="page">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
-                            Dashboard
+                            Find a Tutor
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
                           <a href="/schedule" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                             Schedule
+                          </a>
+                        </li>
+                        <li style="padding-top: 2rem;">
+                          <a href="#" class="nav-link text-white">
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
+                            Requests
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
@@ -69,17 +75,18 @@
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1"> {{ username }}</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li><a class="dropdown-item" href="{% url 'tutorme:profile' user.username %}">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
-                        </ul>
+                      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                          <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                          <span class="d-none d-sm-inline mx-1">{{user}}</span>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                          
+                          <li><a class="dropdown-item" href="{% url 'tutorme:profile' user.username %}">Profile</a></li>
+                          <li>
+                              <hr class="dropdown-divider">
+                          </li>
+                          <li><a class="dropdown-item" href="{% url 'schedule_builder:logout' %}">Sign out</a></li>
+                      </ul>
                     </div>
                 </div>
             </div>
