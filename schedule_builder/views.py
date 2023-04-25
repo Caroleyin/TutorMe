@@ -118,12 +118,13 @@ def add_event(request):
     start = request.GET.get("start", None)
     end = request.GET.get("end", None)
     title = request.GET.get("title", None)
+    newtitle = str(title) + '\n' + 'Hourly Rate: $' + str(AppUser.objects.get(pk = request.user.id).hourly_rate)
 
     # change name=request.user.id if needed (to the unique identifer)
-    event = Events(name=str(title), start=start, end=end, schedule=Schedule.objects.get(user=AppUser.objects.get(pk = request.user.id)))
+    event = Events(name=str(newtitle), start=start, end=end, schedule=Schedule.objects.get(user=AppUser.objects.get(pk = request.user.id)))
 
     # tutor = request.user
-    # newtitle = str(title) + '\n' + 'Hourly Rate: $' + str(tutor.hourly_rate)
+    
     # event = Events(name=newtitle, start=start, end=end)
     # event.tutor = tutor
 
