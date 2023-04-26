@@ -1,4 +1,4 @@
-<!-- templates/searchForTutord.html -->
+<!-- templates/requestsPage.html -->
 {% load static %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
@@ -48,12 +48,22 @@
                             Home
                           </a>
                         </li>
+                        {% if user.is_student %}
                         <li style="padding-top: 2rem;">
                           <a href="/tutorme/search" class="nav-link active" aria-current="page">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
                             Find a Tutor
                           </a>
                         </li>
+                        {% endif %}
+                        {% if user.is_tutor %}
+                        <li style="padding-top: 2rem;">
+                            <a href="/tutorme/addClasses/" class="nav-link text-white">
+                              <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
+                              Add Your Classes
+                            </a>
+                        </li>
+                        {% endif %}
                         <li style="padding-top: 2rem;">
                           <a href="/schedule/{{user.id}}" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
@@ -90,50 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col py-3">
-                <form method="get">
-                    <label for="course">Search for tutors by course:</label>
-                    <input type="text" id="course" name="course" placeholder="Enter course title">
-                    <button type="submit">Search</button>
-                </form>
-
-                {% if tutors %}
-                    <ul>
-                        {% for tutor in tutors %}
-                            <li>
-                                  <div class="container">
-                                  <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                      <div class="card">
-                                        <div class="card-body">
-                                          <div class="row">
-                                            <div class="col-md-6">
-                                              <h5 class="card-title text-muted mb-0">First name:</h5>
-                                              <p class="card-text mb-3">{{ tutor.first_name }}</p>
-                                            </div>
-                                            <div class="col-md-6">
-                                              <h5 class="card-title text-muted mb-0">Last name:</h5>
-                                              <p class="card-text mb-3">{{ tutor.last_name }}</p>
-                                            </div>
-                                          </div>
-                                          <div class="row justify-content-end">
-                                            <div class="col-md-3">
-                                              <a href="/tutorme/student/{{ tutor.username }}" class="btn btn-primary">View Tutor Profile</a>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No tutors found.</p>
-                {% endif %}
-            </div>
+            
         </div>
     </div>
     </section>

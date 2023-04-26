@@ -14,10 +14,12 @@ from django.contrib import messages
 from schedule_builder.models import Requests
 from schedule_builder.models import Schedule
 # from tutorme.models import StudentProfile
+from tutorme import templates
 
 from .forms import UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
 
 """
 @login_required
@@ -180,5 +182,6 @@ def all_requests(request):
             'student': req.student_id,
             'tutor': req.tutor_id,
             'accepted': req.accepted,
-        })                                                                                                                                                                                                                  
-    return JsonResponse(out, safe=False)
+        })            
+    return render(request,'requestsPage.html')                                                                                                                                                                                                      
+    # return JsonResponse(out, safe=False)
