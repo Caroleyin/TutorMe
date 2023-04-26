@@ -15,7 +15,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutor</title>
+    <title>Tutor - Add Classes</title>
   </head>
 
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -41,49 +41,55 @@
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                 <div class="d-flex flex-column align-items-center align-items-sm-start my-auto px-3 pt-2 text-white min-vh-100">
-                    <a href="/" class="d-flex align-items-center py-8 text-start text-white text-decoration-none">
+                    <a href="/tutorme/student" class="d-flex align-items-center py-8 text-start text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline" style="padding-top: 1rem;">TutorMe</span>
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-10 align-items-center align-items-sm-start justify-content-between" id="menu">
-                        <li class="nav-item p-6" style="padding-top: 2rem;">
-                          <a href="#" class="nav-link active" aria-current="page">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#home"></use></svg>
-                            Home
-                          </a>
-                        </li>
-                        <li style="padding-top: 2rem;">
-                          <a href="/tutorme/addClasses/" class="nav-link text-white">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
-                            Add Your Classes
-                          </a>
-                        </li>
-                        <li style="padding-top: 2rem;">
-                          <a href="/schedule/{{user.id}}" class="nav-link text-white">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
-                            Schedule
-                          </a>
-                        </li>
-                        <li style="padding-top: 2rem;">
-                          <a href="{% url 'tutorme:profile' user.username %}" class="nav-link text-white">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#people-circle"></use></svg>
-                            Profile
-                          </a>
-                        </li>
-                    </ul>
-                    <hr>
-                    <div class="dropdown pb-4">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">{{user}}</span>
+                      <li class="nav-item p-6" style="padding-top: 2rem;">
+                        <a href="/tutorme/student" class="nav-link text-white">
+                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#home"></use></svg>
+                          Home
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="{% url 'tutorme:profile' user.username %}">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="{% url 'schedule_builder:logout' %}">Sign out</a></li>
-                        </ul>
+                      </li>
+                      <li style="padding-top: 2rem;">
+                        <a href="/tutorme/addClasses/" class="nav-link active" aria-current="page">
+                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
+                          Add Your Classes
+                        </a>
+                      </li>
+                      <li style="padding-top: 2rem;"> 
+                        <a href="/tutorme/student/schedule/{{user.id}}" class="nav-link text-white">
+                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
+                          Schedule
+                        </a>
+                      </li>
+                      <li style="padding-top: 2rem;"> 
+                        <a href="/tutorme/student/schedule/requests" class="nav-link text-white">
+                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
+                          Requests
+                        </a>
+                      </li>
+                      <li style="padding-top: 2rem;">
+                        <a href="{% url 'tutorme:profile' user.username %}" class="nav-link text-white">
+                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#people-circle"></use></svg>
+                          Profile
+                        </a>
+                      </li>
+                  </ul>
+                  <hr>
+                  <div class="dropdown pb-4">
+                      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                          <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                          <span class="d-none d-sm-inline mx-1">{{user}}</span>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                          
+                          <li><a class="dropdown-item" href="{% url 'tutorme:profile' user.username %}">Profile</a></li>
+                          <li>
+                              <hr class="dropdown-divider">
+                          </li>
+                          <li><a class="dropdown-item" href="{% url 'schedule_builder:logout' %}">Sign out</a></li>
+                      </ul>
                     </div>
                 </div>
             </div>
@@ -91,23 +97,7 @@
                 {Tutor} Content area...
 
                 <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
-                  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-                    <div class="container-fluid">
-                      <button class="navbar-toggler" type="button">
-                        <span class="navbar-toggler-icon"></span>
-                      </button>
-
-                      <div class="collapse navbar-collapse d-lg-flex justify-content-between">
-                        <a class="navbar-brand col-lg-3 me-0" href="#">TutorMe</a>
-                          <form class="form-inline">
-                              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            </form>
-                        <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-                          <button class="btn btn-outline-secondary rounded-pill text-white px-4">{{ user }}</button>
-                        </div>
-                      </div>
-                    </div>
-                  </nav>
+                  
 
 
                     <div class ="main">
