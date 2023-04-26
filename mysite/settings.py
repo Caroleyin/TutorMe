@@ -98,10 +98,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+import sys
 DATABASES = {
     'default': dj_database_url.config(default='postgres://nxhwbbuvbcbiex:97345915f5575af75431c4e6ae88983181f3cd241dbae39d204e0729eaa0422b@ec2-44-206-204-65.compute-1.amazonaws.com:5432/d6lei76un9102k')
 }
 
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
