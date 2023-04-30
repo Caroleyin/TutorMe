@@ -153,7 +153,7 @@ SITE_ID = 13
 AUTH_USER_MODEL = 'tutorme.AppUser'
 
 
-LOGIN_REDIRECT_URL = '/tutorme/student'
+LOGIN_REDIRECT_URL = '/tutorme/index'
 LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
