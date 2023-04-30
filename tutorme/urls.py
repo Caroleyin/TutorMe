@@ -10,7 +10,7 @@ urlpatterns = [
     path('about/', views.AboutView.as_view(), name='about'),
     path('accounts/', include('allauth.urls')),
     path('auth/', views.AuthView.as_view(), name='auth'),
-    path('student/', views.StudentView.as_view(), name='student'),
+    path('index/', views.StudentView.as_view(), name='student'),
     path('student/schedule/', include('schedule_builder.urls')),
 
     path('student/<username>', views.profile, name='profile'),

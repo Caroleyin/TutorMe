@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student - Find a Tutor</title>
+    <title>Student - Requests</title>
   </head>
 
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -30,6 +30,9 @@
         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
       </symbol>
+      <symbol id="search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+      </symbol>
   </svg>
 
   <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
@@ -43,15 +46,15 @@
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-10 align-items-center align-items-sm-start justify-content-between" id="menu">
                         <li class="nav-item p-6" style="padding-top: 2rem;">
-                          <a href="/tutorme/student" class="nav-link text-white">
+                          <a href="/tutorme/index" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#home"></use></svg>
-                            Home
+                            Index
                           </a>
                         </li>
                         {% if user.is_student %}
                         <li style="padding-top: 2rem;">
-                          <a href="/tutorme/search" class="nav-link active" aria-current="page">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
+                          <a href="/tutorme/search" class="nav-link text-white">
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#search"></use></svg>
                             Find a Tutor
                           </a>
                         </li>
@@ -63,16 +66,19 @@
                               Add Your Classes
                             </a>
                         </li>
-                        {% endif %}
+                        
                         <li style="padding-top: 2rem;">
                           <a href="/schedule/{{user.id}}" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                             Schedule
                           </a>
                         </li>
+
+                        {% endif %}
+
                         <li style="padding-top: 2rem;">
-                          <a href="/tutorme/student/schedule/requests" class="nav-link text-white">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
+                          <a href="/tutorme/student/schedule/requests" class="nav-link active" aria-current="page">
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                             Requests
                           </a>
                         </li>

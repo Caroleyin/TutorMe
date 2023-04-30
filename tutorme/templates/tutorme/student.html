@@ -7,9 +7,10 @@
 
 <!DOCTYPE html>
 
-{% if user.is_tutor %}
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="{% static 'tutorme/style.css' %}">
+{% if user.is_tutor %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +18,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutor</title>
+    <title>Tutor View</title>
   </head>
 
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -43,14 +44,14 @@
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                 <div class="d-flex flex-column align-items-center align-items-sm-start my-auto px-3 pt-2 text-white min-vh-100">
-                    <a href="/tutorme/student" class="d-flex align-items-center py-8 text-start text-white text-decoration-none">
+                    <a href="/" class="d-flex align-items-center py-8 text-start text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline" style="padding-top: 1rem;">TutorMe (Tutor)</span>
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-10 align-items-center align-items-sm-start justify-content-between" id="menu">
                         <li class="nav-item p-6" style="padding-top: 2rem;">
                           <a href="/tutorme/student" class="nav-link active" aria-current="page">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#home"></use></svg>
-                            Home
+                            Index
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
@@ -67,7 +68,7 @@
                         </li>
                         <li style="padding-top: 2rem;"> 
                           <a href="/tutorme/student/schedule/requests" class="nav-link text-white">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                             Requests
                           </a>
                         </li>
@@ -155,6 +156,10 @@
         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
       </symbol>
+      <symbol id="search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+      </symbol>
+      
   </svg>
 
   <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
@@ -168,14 +173,14 @@
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-10 align-items-center align-items-sm-start justify-content-between" id="menu">
                         <li class="nav-item p-6" style="padding-top: 2rem;">
-                          <a href="#" class="nav-link active" aria-current="page">
+                          <a href="/tutorme/index" class="nav-link active" aria-current="page">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#home"></use></svg>
-                            Home
+                            Index
                           </a>
                         </li>
                         <li style="padding-top: 2rem;">
                           <a href="/tutorme/search/" class="nav-link text-white">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#search"></use></svg>
                             Find a Tutor
                           </a>
                         </li>
@@ -187,7 +192,7 @@
                         </li> -->
                         <li style="padding-top: 2rem;"> 
                           <a href="/tutorme/student/schedule/requests" class="nav-link text-white">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                             Requests
                           </a>
                         </li>
@@ -205,7 +210,6 @@
                             <span class="d-none d-sm-inline mx-1">{{user}}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li><a class="dropdown-item" href="{% url 'tutorme:profile' user.username %}">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -215,9 +219,58 @@
                     </div>
                 </div>
             </div>
-            <div class="col py-3">
-                {Student} Content area...
-            </div>
+           <!-- <div class="col py-3"> -->
+
+                <div class = "project-grid"> 
+                  <div class = "project">
+                   <a href="/" target="_blank">
+                   <img src="{% static 'tutorme/home.png' %}" alt="Home">
+                   <div class="overlay">
+                   <div class = "project-description">
+                       <p class = "project-title">Index</p>
+                       <p class = "project-text">Return to the login page</p>
+                   </div>
+                   </div>
+                   </a>
+                  </div>
+       
+                  <div class = "project">
+                   <a href="/tutorme/search" target="_blank">
+                   <img src="{% static 'tutorme/findatutor.png' %}" alt="Find a Tutor">
+                   <div class="overlay">
+                   <div class = "project-description">
+                       <p class = "project-title">Find a Tutor</p>
+                       <p class = "project-text">Look up your classes to see available tutors!</p>
+                   </div>
+                   </div>
+                  </a>
+                   </div>
+
+                   <div class = "project">
+                    <a href="/tutorme/student/schedule/requests" target="_blank">
+                    <img src="{% static 'tutorme/requests.png' %}" alt="requests">
+                    <div class="overlay">
+                    <div class = "project-description">
+                        <p class = "project-title">Requests</p>
+                        <p class = "project-text">View your tutor scheduling requests</p>
+                    </div>
+                    </div>
+                  </a>
+               </div>
+
+               <div class = "project">
+                <a href="{% url 'tutorme:profile' user.username %}" target="_blank">
+                <img src="{% static 'tutorme/profile.png' %}" alt="profile">
+                <div class="overlay">
+                <div class = "project-description">
+                    <p class = "project-title">Profile</p>
+                    <p class = "project-text">View and edit your information</p>
+                </div>
+                </div>
+               </a>
+                </div>
+
+           <!-- </div> -->
         </div>
     </div>
     </section>
