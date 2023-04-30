@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'schedule_builder.apps.ScheduleBuilderConfig',
     'crispy_forms',
     'crispy_bootstrap5',
-    'whitenoise'
 ]
 
 
@@ -61,8 +60,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    #uncomment these when deploying to heroku
+    #"django.middleware.security.SecurityMiddleware",
+    #"whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
