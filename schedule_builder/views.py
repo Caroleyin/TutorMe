@@ -162,8 +162,10 @@ def request_tutor(request, user_id):
         title = request.GET.get("title", None)
         start = request.GET.get("start", None)
         end = request.GET.get("end", None)
-        student = request.user.id
-        tutor = user_id
+        # student = request.user.id
+        student = AppUser.objects.get(pk = request.user.id).username
+        # tutor = user_id
+        tutor = AppUser.objects.get(pk = user_id).username
         request = Requests(event_title = title, start_time = start, end_time = end, student_id = student, tutor_id = tutor)
         request.save()
         data = {}
@@ -173,15 +175,22 @@ def request_tutor(request, user_id):
 
 def all_requests(request):
     # all_requests = Requests.objects.all()
-    all_requests = Requests.objects.filter(tutor_id=request.user.id) | Requests.objects.filter(student_id=request.user.id)
-    out = []                                                                                                             
-    for req in all_requests:                                                                          
-        out.append({                                                                                            
-            'start': req.start_time.strftime("%m/%d/%Y, %H:%M:%S"),                                                         
-            'end': req.end_time.strftime("%m/%d/%Y, %H:%M:%S"),      
-            'student': req.student_id,
-            'tutor': req.tutor_id,
-            'accepted': req.accepted,
-        })            
-    return render(request,'requestsPage.html')                                                                                                                                                                                                      
+    all_requests = Requests.objects.filter(tutor_id= AppUser.objects.get(pk = request.user.id).username) | Requests.objects.filter(student_id= AppUser.objects.get(pk = request.user.id).username)
+    # user = request.user
+    
+    # out = []                                                                                                             
+    # for req in all_requests:                                                                          
+    #     out.append({
+    #         'title': req.event_title,                                                                                            
+    #         'start': req.start_time.strftime("%m/%d/%Y, %H:%M:%S"),                                                         
+    #         'end': req.end_time.strftime("%m/%d/%Y, %H:%M:%S"),      
+    #         'student': req.student_id,
+    #         'tutor': req.tutor_id,
+    #         'accepted': req.accepted,
+    #     })                                                                                                          
+    context = {
+        "all_reqs": all_requests,
+    }
+    # print(out)
+    return render(request,'requestsPage.html', context)                                                                                                                                                                                                      
     # return JsonResponse(out, safe=False)
