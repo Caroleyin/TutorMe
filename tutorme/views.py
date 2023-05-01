@@ -10,11 +10,11 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.http import HttpResponse
 from .models import AppUser, CourseAsText
 from django.contrib.auth import get_user_model
 from .forms import UserUpdateForm
-
-from django.http import JsonResponse
+from schedule_builder.models import Requests
 
 class IndexView(generic.ListView):
     template_name = 'tutorme/index.html'
@@ -101,3 +101,15 @@ def profile(request, username):
         form.fields['description'].widget.attrs = {'rows': 1}
         return render(request, 'tutorme/studentprofile.html', context={'form': form, 'user_id': user.id})
     return render(request, 'tutorme/studentprofile.html')
+
+
+def accepRequestView(request):
+    req=request.POST.get("value")
+    req.accepted = True
+    req.save()  
+    # b=Requests.objects.filter(id=str(value))
+    #delete change statement
+    # resp=json.dumps(b)
+    # return HttpResponse(resp, content_type="application/json")
+    data = {}
+    return JsonResponse(data)
