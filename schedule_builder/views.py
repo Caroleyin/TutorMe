@@ -185,3 +185,12 @@ def all_requests(request):
         })            
     return render(request,'requestsPage.html')                                                                                                                                                                                                      
     # return JsonResponse(out, safe=False)
+#/***************************************************************************************
+#*  REFERENCES
+#*  Title: Python Django Ajax FullCalender CRUD (Create, Read, Update and Delete) Mysql Database
+#*  Author: ednalan 
+#*  Date: May 22, 2022
+#*  URL: https://tutorial101.blogspot.com/2022/05/python-django-ajax-fullcalender-crud.html
+#*
+#*
+#***************************************************************************************/
