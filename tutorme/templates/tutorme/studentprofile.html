@@ -256,19 +256,29 @@
                         Home
                       </a>
                     </li>
-                    
+                    {% if user.username == form.instance.username %}
                     <li style="padding-top: 2rem;">
                       <a href="/tutorme/addClasses/" class="nav-link text-white">
                         <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#search"></use></svg>
                         Add Classes
                       </a>
                     </li>
+                    
                     <li style="padding-top: 2rem;"> 
                       <a href="/tutorme/student/schedule/{{user.id}}" class="nav-link text-white">
                         <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                         Schedule
                       </a>
                     </li>
+                    {% endif %}
+                    {% if user.username != form.instance.username %}
+                    <li style="padding-top: 2rem;">
+                      <a href="/tutorme/search/" class="nav-link text-white">
+                        <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#search"></use></svg>
+                        Find a Tutor
+                      </a>
+                    </li> 
+                    {% endif %}
                     <li style="padding-top: 2rem;"> 
                       <a href="/tutorme/student/schedule/requests" class="nav-link text-white">
                         <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#check"></use></svg>
