@@ -111,8 +111,17 @@
             </div>
 
             <div class="col py-3">
-                <label for="course">All requested tutoring sessions:</label>
+                <!-- <label for="course">All requested tutoring sessions:</label> -->
 
+                <div class="searchform">
+                  <form method="get" class="border border-light py-5">
+                    <h3 class="text-center">All requested tutoring sessions</h3>
+                    <div class="form-group">
+                  </div>
+                </form>
+                </div>
+                
+              <div class="tutors">
               {% if all_reqs %}
                   <ul>
                       {% for req in all_reqs %}
@@ -144,18 +153,18 @@
                                           </div>
                                         </div>
                                         {% if user.is_tutor and not req.accepted%}
-                                        <div class="row justify-content">
-                                            <a href="/tutorme/student/schedule/accept_req/{{req.pk}}" class="btn btn-primary" onclick="confirm('Accept the incoming request?')">Accept request for tutoring session</a>                        
-                                        </div>
+                                        <!-- <div class="row justify-content"> -->
+                                            <a href="/tutorme/student/schedule/accept_req/{{req.pk}}" class="btn btn-info" role="button" onclick="confirm('Accept the incoming request?')">Accept request for tutoring session</a>                        
+                                        <!-- </div> -->
                                         {% endif %}
                                         {% if user.is_tutor and req.accepted%}
                                         <div class="row justify-content">
-                                          <p class="card-text mb-3 text-muted mb-0">Tutoring session already accepted!</p>                        
+                                          <p class="card-text mb-3 text-muted mb-0">Tutoring session accepted!</p>                        
                                         </div>
                                         {% endif %}
                                         {% if user.is_student and req.accepted%}
                                           <div class="row justify-content">
-                                              <p class="card-text mb-3 text-muted mb-0">Tutoring session accepted by tutor!</p>
+                                              <p class="card-text mb-3 text-primary mb-0">Tutoring session accepted by tutor!</p>
                                           </div>
                                         {% endif %}
                                         {% if user.is_student and not req.accepted%}
@@ -175,6 +184,7 @@
               {% else %}
                   <p>No tutoring session requests found.</p>
               {% endif %}
+            </div>
         </div>
 
     </div>
