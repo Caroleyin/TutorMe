@@ -5,9 +5,18 @@
 {% block content %}
 <div class="col-md-12">
     <h4 class="display-5 fw-bold lh-1 mb-3">TutorMe Schedule Builder</h4>
+    {% if user.is_tutor %}
+    <small>Instructions: <br>Click on an empty space in the calendar to add your available timeslot(s) 
+        <br>Click and drag on an existing timeslot to edit the duration
+        <br>Click on an existing timeslot to delete it
+    </small>
+    {% else %}
+    <small>STUDENTS: <br>Click on an existing timeslot in the tutor's calendar to send a scheduling request</small>
+    {% endif %}
     <h2 class="account-heading">{{ user.username }}</h2> 
     <div id="calendar"></div> 
 </div> 
+
 {% endblock content %} 
 
 {% block script %}
