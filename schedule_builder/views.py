@@ -19,6 +19,7 @@ from tutorme import templates
 from .forms import UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import HttpResponse
 
 
 """
@@ -194,3 +195,10 @@ def all_requests(request):
     # print(out)
     return render(request,'requestsPage.html', context)                                                                                                                                                                                                      
     # return JsonResponse(out, safe=False)
+
+def acceptRequestView(request, id):
+    req = Requests.objects.get(pk = id)
+    req.accepted = True
+    req.save()  
+    print(req.accepted)
+    return redirect('/tutorme/student/schedule/requests')

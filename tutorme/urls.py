@@ -18,6 +18,6 @@ urlpatterns = [
     path('search/', views.SearchForTutor.as_view(), name='searchForTutor'),
     path('addClasses/', views.TutorAddClassView.as_view(), name='tutorAddClasses'),
     path('about/', views.AboutView.as_view(), name='about'),
-    path('accept_req/', views.accepRequestView, name='accept_req'), 
+    
     # path('requests/', views.all_requests, name='requests'),
 ]

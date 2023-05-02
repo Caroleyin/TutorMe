@@ -139,48 +139,22 @@
                                             <p class="card-text mb-3">{{ req.end_time }}</p>
                                           </div>
                                         </div>
-                                        {% if user.is_tutor %}
+                                        {% if user.is_tutor and not req.accepted%}
                                         <div class="row justify-content">
-                                          <!-- <div class="col-md-3"> -->
-                                            <!-- <a href="/tutorme/student/{{ tutor.username }}" class="btn btn-primary">Accept tutoring session</a> -->
-                                            <!-- <a class="btn btn-primary" onclick="req.accepted = True">Accept tutoring session</a> -->
-                                            <!-- <button onclick="change()">Accept tutoring session </button> -->
-                                            <!-- <input type="button" value = "Accepting request for tutoring session" onclick="clicked(event)" /> -->
-
-                                            <button class="btn btn-info btn-block" type="submit" onclick="acceptReq({{ req }});">Accept request for tutoring session</button>
-                                            <!-- <script type="text/javascript">
-                                              function clicked()
-                                              {
-                                                  if(confirm('Accept the incoming request?')) {
-                                                    document.getElementById("demo").innerHTML = "You accepted the request!";
-                                                      // return True;
-                                                  }
-                                              }
-                                              </script>                                               -->
-                                              <script>
-                                                function acceptReq(r)
-                                                {
-                                                    $.ajax({
-                                                        url: "/accept_req/",
-                                                        type: "POST",
-                                                        data: {'value':r},
-                                                        success: function(response) {
-                                                          alert('Request accepted!');
-                                                        },
-                                            
-                                                    });
-                                                }
-                                            </script>
-                                          <!-- </div> -->
-                                          
+                                            <a href="/tutorme/student/schedule/accept_req/{{req.pk}}" class="btn btn-primary" onclick="confirm('Accept the incoming request?')">Accept request for tutoring session</a>                        
                                         </div>
                                         {% endif %}
-                                        {% if user.is_student and req.is_accepted%}
+                                        {% if user.is_tutor and req.accepted%}
+                                        <div class="row justify-content">
+                                          <p class="card-text mb-3 text-muted mb-0">Tutoring session already accepted!</p>                        
+                                        </div>
+                                        {% endif %}
+                                        {% if user.is_student and req.accepted%}
                                           <div class="row justify-content">
-                                              <p class="card-text mb-3 text-muted mb-0">>Tutoring session accepted by tutor!</p>
+                                              <p class="card-text mb-3 text-muted mb-0">Tutoring session accepted by tutor!</p>
                                           </div>
                                         {% endif %}
-                                        {% if user.is_student and not req.is_accepted%}
+                                        {% if user.is_student and not req.accepted%}
                                           <div class="row justify-content">
                                               <p class="card-text mb-3 text-muted mb-0">Tutoring session not yet accepted by tutor</p>
                                           </div>

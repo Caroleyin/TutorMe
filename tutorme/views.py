@@ -102,14 +102,3 @@ def profile(request, username):
         return render(request, 'tutorme/studentprofile.html', context={'form': form, 'user_id': user.id})
     return render(request, 'tutorme/studentprofile.html')
 
-
-def accepRequestView(request):
-    req=request.POST.get("value")
-    req.accepted = True
-    req.save()  
-    # b=Requests.objects.filter(id=str(value))
-    #delete change statement
-    # resp=json.dumps(b)
-    # return HttpResponse(resp, content_type="application/json")
-    data = {}
-    return JsonResponse(data)
