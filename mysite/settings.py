@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -103,7 +104,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 import sys
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://nxhwbbuvbcbiex:97345915f5575af75431c4e6ae88983181f3cd241dbae39d204e0729eaa0422b@ec2-44-206-204-65.compute-1.amazonaws.com:5432/d6lei76un9102k')
+    'default': dj_database_url.config(default='postgres://xmrltqtyjvsajn:871af0c4004b9d4b86f75f4c95d7b41d48592e745e86d4fe3d67397fd7901011@ec2-52-21-61-131.compute-1.amazonaws.com:5432/df09lahouk9jr4')
 }
 
 if 'test' in sys.argv or 'test_coverage' in sys.argv:

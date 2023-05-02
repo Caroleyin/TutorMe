@@ -304,8 +304,44 @@
             <br>
             <!-- <button class="btn btn-outline-info" type="submit">Go to schedule</button> -->
         </div>
+        <section id="reviews">
+          <div class="container px-4 py-5" id="custom-cards">
+              <h2 class=" border-bottom">Reviews</h2>
+              <div class="py-1">
+                  {% if user %}
+                  {% for comment in user.review.all %}
+                  <div class="d-flex flex-start py-4 align-items-center">
+                      <img class="shadow-1-strong me-3 object-fit-scale"
+                        src="https://i.pinimg.com/736x/e0/d3/23/e0d3236b653b8405d9fda7f064c6b49c--university-of-virginia-sports-logos.jpg" alt="avatar" width="60"
+                        height="60"/>
+                  <div>
+                      <div class="d-flex justify-content-between align-items-center">
+                      {% load humanize %}
+                      <div>
+                        <p class="mb-1 small fw-bold">{{ comment.title_text }}</p>
+                        <p class="small mb-0">
+                            {{ comment.review_text }}
+                        </p>
+                      </div>
+                      </div>
+                  </div>
+                  </div>
+                  {% endfor %}
+                  {% else %}
+                      <p>No reviews are available.</p>
+                  {% endif %}
+              </div>
+              {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %} 
+              <form action="{% url 'tutorme:post' user.username %}" method="post">
+                {% csrf_token %}
+                <input type="text" id="title_field" name="title_field" placeholder ="title" class="form-control mt-2" style="width:20rem">
+                <textarea class="form-control mt-2" id="comment_field" name="comment_field" placeholder="comment" rows="4"
+                  style="background: #fff;"></textarea>
+                <input class="btn btn-secondary btn-sm mt-4" type="submit" value="Review"/>
+              </form>
+          </div>
+      </section>        
       {% endif %}
-
             </div>
             
             <div class="editprofile">

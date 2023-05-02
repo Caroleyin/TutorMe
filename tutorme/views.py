@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from .models import AppUser, CourseAsText
+from .models import AppUser, CourseAsText, Review
 from django.contrib.auth import get_user_model
 from .forms import UserUpdateForm
 
@@ -105,7 +105,14 @@ def userpage(request):
 	return render(request=request, template_name="tutorme/studentprofile.html", context={"user":request.user, "user_form":user_form, "profile_form":profile_form })
 """
 
-
+def postComment(request, pk):
+    user = get_object_or_404(AppUser, pk=pk)
+    if request.method == 'POST':
+            user = get_object_or_404(AppUser, pk=pk)
+            review = Review(title_text=request.POST['title_field'], review_text=request.POST['comment_field'], user=user)
+            review.save()
+    return HttpResponseRedirect(reverse('tutorme:student', args=(user.username,)))
+    
 def profile(request, username):
     if request.method == 'POST':
         user = request.user

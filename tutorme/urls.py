@@ -12,9 +12,8 @@ urlpatterns = [
     path('auth/', views.AuthView.as_view(), name='auth'),
     path('index/', views.StudentView.as_view(), name='student'),
     path('student/schedule/', include('schedule_builder.urls')),
-
     path('student/<username>', views.profile, name='profile'),
-    
+    path('student/<username>/post', views.postComment, name='post'),
     path('search/', views.SearchForTutor.as_view(), name='searchForTutor'),
     path('addClasses/', views.TutorAddClassView.as_view(), name='tutorAddClasses'),
     path('about/', views.AboutView.as_view(), name='about'),
