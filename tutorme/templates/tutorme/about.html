@@ -26,17 +26,12 @@
           <a class="navbar-brand col-lg-3 me-0" href="">TutorMe</a>
           <ul class="navbar-nav col-lg-6 justify-content-lg-center">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/tutorme/about">About</a>
+              <a class="nav-link active" aria-current="page" href="/tutorme/about">About</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/tutorme/courses">Courses</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/tutorme/tutors">Tutors</a>
-            </li>
+            
           </ul>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
             <a href="{% provider_login_url 'google' %}"><button class="btn btn-outline-secondary rounded-pill text-white px-4"> Login →</button></a>
@@ -48,11 +43,11 @@
       <section id="landing">
         <div class="container col-xxl-8 px-4 py-5">
           <div class="row flex-lg-row-reverse align-items-center g-1 py-1">
-              <h1 class="display-2 lh-6 mb-4 fw-bold text-decoration-underline text-center">About TutorMe</h1>
+              <h2 class="fw-bold text-decoration-underline text-center">About TutorMe</h2>
               <p class="fs-4 lead">
-                  TutorMe is a tool for students to find tutors. Simply sign up for an account and begin to browse the many tutors excited to assist in your education.
-                  Filter by what class you need help in, and find someone who can help you achieve in that class. No matter what class, there is likely a tutor for you!
+                  TutorMe is a tool for UVA students to find tutors for their courses. Simply sign up with your Google account, add your classes, and we will find available students or tutors for you!
               </p>
+              <a href="{% provider_login_url 'google' %}"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2 rounded-pill">Get Started</button></a>
           </div>
         </div>
       </section>
@@ -61,7 +56,7 @@
   <footer>
     <div class="container">
       <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-muted">© 2022 Project-A-14</p>
+        <p class="col-md-4 mb-0 text-muted">© 2023 Project-A-14</p>
 
         <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
@@ -70,9 +65,6 @@
         <ul class="nav col-md-4 justify-content-end">
           <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
           <li class="nav-item"><a href="/tutorme/about" class="nav-link px-2 text-muted">About</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Tutors</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
         </ul>
       </footer>
     </div>

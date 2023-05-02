@@ -176,19 +176,8 @@ def request_tutor(request, user_id):
 
 def all_requests(request):
     # all_requests = Requests.objects.all()
-    all_requests = Requests.objects.filter(tutor_id= AppUser.objects.get(pk = request.user.id).username) | Requests.objects.filter(student_id= AppUser.objects.get(pk = request.user.id).username)
-    # user = request.user
-    
-    # out = []                                                                                                             
-    # for req in all_requests:                                                                          
-    #     out.append({
-    #         'title': req.event_title,                                                                                            
-    #         'start': req.start_time.strftime("%m/%d/%Y, %H:%M:%S"),                                                         
-    #         'end': req.end_time.strftime("%m/%d/%Y, %H:%M:%S"),      
-    #         'student': req.student_id,
-    #         'tutor': req.tutor_id,
-    #         'accepted': req.accepted,
-    #     })                                                                                                          
+
+    all_requests = Requests.objects.filter(tutor_id= AppUser.objects.get(pk = request.user.id).username) | Requests.objects.filter(student_id= AppUser.objects.get(pk = request.user.id).username)                                                                                                    
     context = {
         "all_reqs": all_requests,
     }
@@ -202,3 +191,14 @@ def acceptRequestView(request, id):
     req.save()  
     print(req.accepted)
     return redirect('/tutorme/student/schedule/requests')
+
+#/***************************************************************************************
+#*  REFERENCES
+#*  Title: Python Django Ajax FullCalender CRUD (Create, Read, Update and Delete) Mysql Database
+#*  Author: ednalan 
+#*  Date: May 22, 2022
+#*  URL: https://tutorial101.blogspot.com/2022/05/python-django-ajax-fullcalender-crud.html
+#*
+#*
+#***************************************************************************************/
+
