@@ -33,6 +33,13 @@
     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
     <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
   </symbol>
+  <symbol id="search" viewBox="0 0 16 16">
+    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+  </symbol>
+  <symbol id="check" viewBox="0 0 16 16">
+    <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+    <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+  </symbol>
 </svg>
 <body>
 
@@ -70,32 +77,40 @@
                           Home
                         </a>
                       </li>
-
+                      {% if user.is_student %}
+                      <li style="padding-top: 2rem;">
+                        <a href="/tutorme/search/" class="nav-link text-white">
+                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#search"></use></svg>
+                          Find a Tutor
+                        </a>
+                      </li> 
+                      {% endif %}
+                      {% if user.is_tutor %}
                       <li style="padding-top: 2rem;">
                         <a href="/tutorme/addClasses/" class="nav-link text-white">
-                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
-                          Add Your Classes
+                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#search"></use></svg>
+                          Add Classes
                         </a>
                       </li>
 
                       <li style="padding-top: 2rem;"> 
-
-                        <a href="/tutorme/student/schedule/{{user.id}}" class="nav-link text-white">
+                        <a href="/tutorme/student/schedule/{{user.id}}" class="nav-link active" aria-current="page">
 
                           <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                           Schedule
                         </a>
                       </li>
+                      {% endif %}
                       
                       <li style="padding-top: 2rem;">
                         <a href="/tutorme/student/schedule/requests" class="nav-link text-white">
-                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
+                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#check"></use></svg>
                           Requests
                         </a>
                       </li>
-
+                        
                         <li style="padding-top: 2rem;">
-                          <a href="{% url 'schedule_builder:profile' user.username %}" class="nav-link text-white">
+                          <a href="{% url 'tutorme:profile' user.username %}" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#people-circle"></use></svg>
                             Profile
                           </a>
@@ -134,26 +149,6 @@
     </section>
   </body>
 
-  <footer>
-    <div class="container">
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-muted">© 2023 Project-A-14</p>
-    
-        <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-    
-        <ul class="nav col-md-4 justify-content-end">
-          <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
-          <li class="nav-item"><a href="/tutorme/about" class="nav-link px-2 text-muted">About</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Tutors</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-        </ul>
-      </footer>
-    </div>
-  </footer>
-
 
 
 {% block script %}
@@ -162,3 +157,12 @@
 
 </body>
 </html>
+<!-- /***************************************************************************************
+*  REFERENCES
+*  Title: Python Django Ajax FullCalender CRUD (Create, Read, Update and Delete) Mysql Database
+*  Author: ednalan 
+*  Date: May 22, 2022
+*  URL: https://tutorial101.blogspot.com/2022/05/python-django-ajax-fullcalender-crud.html
+*
+*
+***************************************************************************************/-->

@@ -16,4 +16,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='tutorme/index.html'), name='logout'),
     path('requests/', views.all_requests, name='requests'),
     path('<int:user_id>/request_tutor/', views.request_tutor, name='requests'),
+    path('accept_req/<int:id>', views.acceptRequestView, name='accept_req'), 
 ]

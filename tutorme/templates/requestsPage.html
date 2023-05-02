@@ -33,6 +33,10 @@
       <symbol id="search" viewBox="0 0 16 16">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
       </symbol>
+      <symbol id="check" viewBox="0 0 16 16">
+        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+      </symbol>
   </svg>
 
   <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
@@ -48,7 +52,7 @@
                         <li class="nav-item p-6" style="padding-top: 2rem;">
                           <a href="/tutorme/index" class="nav-link text-white">
                             <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#home"></use></svg>
-                            Index
+                            Home
                           </a>
                         </li>
                         {% if user.is_student %}
@@ -62,10 +66,11 @@
                         {% if user.is_tutor %}
                         <li style="padding-top: 2rem;">
                             <a href="/tutorme/addClasses/" class="nav-link text-white">
-                              <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
-                              Add Your Classes
+                              <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#search"></use></svg>
+                              Add Classes
                             </a>
                         </li>
+                        
                         
                         <li style="padding-top: 2rem;">
                           <a href="/schedule/{{user.id}}" class="nav-link text-white">
@@ -73,12 +78,10 @@
                             Schedule
                           </a>
                         </li>
-
                         {% endif %}
-
                         <li style="padding-top: 2rem;">
                           <a href="/tutorme/student/schedule/requests" class="nav-link active" aria-current="page">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#check"></use></svg>
                             Requests
                           </a>
                         </li>
@@ -106,8 +109,74 @@
                     </div>
                 </div>
             </div>
-            
+
+            <div class="col py-3">
+                <label for="course">All requested tutoring sessions:</label>
+
+              {% if all_reqs %}
+                  <ul>
+                      {% for req in all_reqs %}
+                          <!-- <li> -->
+                                <div class="container">
+                                <div class="row justify-content-center">
+                                  <div class="col-md-6">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="row">
+                                          <!-- <div class="col-md-6"> -->
+                                            <h5 class="card-title">{{ req.event_title }}</h5>
+                                          <!-- </div> -->
+                                          <div class="col-md-6">
+                                            <h5 class="card-title text-muted mb-0">Tutor:</h5>
+                                            <p class="card-text mb-3"> {{ req.tutor_id}}</p>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <h5 class="card-title text-muted mb-0">Student:</h5>
+                                            <p class="card-text mb-3">{{ req.student_id }}</p>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <h5 class="card-title text-muted mb-0">Start time:</h5>
+                                            <p class="card-text mb-3">{{ req.start_time }}</p>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <h5 class="card-title text-muted mb-0">End time:</h5>
+                                            <p class="card-text mb-3">{{ req.end_time }}</p>
+                                          </div>
+                                        </div>
+                                        {% if user.is_tutor and not req.accepted%}
+                                        <div class="row justify-content">
+                                            <a href="/tutorme/student/schedule/accept_req/{{req.pk}}" class="btn btn-primary" onclick="confirm('Accept the incoming request?')">Accept request for tutoring session</a>                        
+                                        </div>
+                                        {% endif %}
+                                        {% if user.is_tutor and req.accepted%}
+                                        <div class="row justify-content">
+                                          <p class="card-text mb-3 text-muted mb-0">Tutoring session already accepted!</p>                        
+                                        </div>
+                                        {% endif %}
+                                        {% if user.is_student and req.accepted%}
+                                          <div class="row justify-content">
+                                              <p class="card-text mb-3 text-muted mb-0">Tutoring session accepted by tutor!</p>
+                                          </div>
+                                        {% endif %}
+                                        {% if user.is_student and not req.accepted%}
+                                          <div class="row justify-content">
+                                              <p class="card-text mb-3 text-muted mb-0">Tutoring session not yet accepted by tutor</p>
+                                          </div>
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                          <!-- </li> -->
+                      {% endfor %}
+                  </ul>
+              {% else %}
+                  <p>No tutoring session requests found.</p>
+              {% endif %}
         </div>
+
     </div>
     </section>
 

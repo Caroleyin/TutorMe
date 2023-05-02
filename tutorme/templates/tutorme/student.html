@@ -36,6 +36,13 @@
         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
       </symbol>
+      <symbol id="search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+      </symbol>
+      <symbol id="check" viewBox="0 0 16 16">
+        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+      </symbol>
   </svg>
 
   <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
@@ -56,8 +63,8 @@
                         </li>
                         <li style="padding-top: 2rem;">
                           <a href="/tutorme/addClasses/" class="nav-link text-white">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
-                            Add Your Classes
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#search"></use></svg>
+                            Add Classes
                           </a>
                         </li>
                         <li style="padding-top: 2rem;"> 
@@ -68,7 +75,7 @@
                         </li>
                         <li style="padding-top: 2rem;"> 
                           <a href="/tutorme/student/schedule/requests" class="nav-link text-white">
-                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
+                            <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#check"></use></svg>
                             Requests
                           </a>
                         </li>
@@ -100,8 +107,58 @@
                 <!--{Tutor} Content area...-->
 
                 <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
+
+                  <div class = "project-grid"> 
+                    <div class = "project">
+                     <a href="/" target="_blank">
+                     <img src="{% static 'tutorme/home.png' %}" alt="Home">
+                     <div class="overlay">
+                     <div class = "project-description">
+                         <p class = "project-title">Index</p>
+                         <p class = "project-text">Return to the login page</p>
+                     </div>
+                     </div>
+                     </a>
+                    </div>
+         
+                    <div class = "project">
+                     <a href="/tutorme/addClasses" target="_blank">
+                     <img src="{% static 'tutorme/findatutor.png' %}" alt="Find a Tutor">
+                     <div class="overlay">
+                     <div class = "project-description">
+                         <p class = "project-title">Add courses</p>
+                         <p class = "project-text">Add the courses that you can tutor for!</p>
+                     </div>
+                     </div>
+                    </a>
+                     </div>
+  
+                     <div class = "project">
+                      <a href="/tutorme/student/schedule/requests" target="_blank">
+                      <img src="{% static 'tutorme/requests.png' %}" alt="requests">
+                      <div class="overlay">
+                      <div class = "project-description">
+                          <p class = "project-title">Requests</p>
+                          <p class = "project-text">View scheduling requests from students</p>
+                      </div>
+                      </div>
+                    </a>
+                 </div>
+  
+                 <div class = "project">
+                  <a href="{% url 'tutorme:profile' user.username %}" target="_blank">
+                  <img src="{% static 'tutorme/profile.png' %}" alt="profile">
+                  <div class="overlay">
+                  <div class = "project-description">
+                      <p class = "project-title">Profile</p>
+                      <p class = "project-text">View and edit your information</p>
+                  </div>
+                  </div>
+                 </a>
+                  </div>
+              </div>
               
-              
+              <!--
                     <div class ="main">
                       <form method="POST">
                         {% csrf_token %}
@@ -119,7 +176,8 @@
                           <p>No courses found.</p>
                         {% endif %}
                     </div>
-              
+
+                  -->              
                 </body>
             </div>
         </div>
@@ -214,7 +272,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            <li><a class="dropdown-item" href="{% url 'schedule_builder:logout' %}">Sign out</a></li>
                         </ul>
                     </div>
                 </div>
