@@ -16,6 +16,9 @@ from django.contrib.auth import get_user_model
 from .forms import UserUpdateForm
 from schedule_builder.models import Requests
 
+import requests
+import json
+
 class IndexView(generic.ListView):
     template_name = 'tutorme/index.html'
     context_object_name = 'tutors'
@@ -57,31 +60,24 @@ class TutorAddClassView(generic.ListView):
 
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
-            text = request.body.decode('utf-8')
-
-            text = text[93:]
-            ampIndex = text.find('&')
-            text = text[:ampIndex]
-            text = text.replace('+', ' ')
-            print(text)
+            url = 'https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1238&page=1'
+            response = requests.get(url + '&subject=' + request.POST['department-select'] + '&catalog_nbr=' + request.POST['course-number-input'])
+            for c in response.json():
+                text = c['subject'] + " " + c['catalog_nbr']
             if text:
                 user_profile = request.user
-
                 course = CourseAsText.objects.filter(title=text).first()
                 if (course is None):
                     course = CourseAsText.objects.create(title=text)
-
                 findClass = user_profile.courses.filter(pk=course.pk).first()
                 if (findClass is None):
                     findClass = course
-
                 user_profile.courses.add(findClass)
                 user_profile.save()
-
                 return redirect('/tutorme/addClasses/')
         return JsonResponse({'status': 'error'})
-
-        """
+    
+"""
  
 class StudentProfileView(generic.CreateView):   
     model = AppUser
@@ -110,7 +106,7 @@ def postComment(request, pk):
             user = get_object_or_404(AppUser, pk=pk)
             review = Review(title_text=request.POST['title_field'], review_text=request.POST['comment_field'], user=user)
             review.save()
-    return HttpResponseRedirect(reverse('tutorme:student', args=(user.username,)))
+    return HttpResponseRedirect(reverse('tutorme:post', args=(user.username,)))
     
 
 def profile(request, username):
