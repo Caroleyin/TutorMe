@@ -119,8 +119,10 @@
                     </div>
                       <button class="btn btn-info btn-block" type="submit">Add Course</button>
                     </form> -->
-                    <form id="search-form" class="pt-10"> 
-                      <select id="department-select">
+                    
+                    <form id="search-form" method="post" class="pt-10"> 
+                      {% csrf_token %}
+                      <select name="department-select">
                         <option value="AAS">AAS</option>
 <option value="ACCT">ACCT</option>
 <option value="AIRS">AIRS</option>
@@ -194,24 +196,24 @@
 <option value="GCCS">GCCS</option>
                         <option value="gcom">GCOM</option> <option value="gds">GDS</option> <option value="germ">GERM</option> <option value="getr">GETR</option> <option value="ghss">GHSS</option> <option value="gnur">GNUR</option> <option value="gree">GREE</option> <option value="gsgs">GSGS</option> <option value="gsms">GSMS</option> <option value="gssj">GSSJ</option> <option value="gsvs">GSVS</option> <option value="hbio">HBIO</option> <option value="hebr">HEBR</option> <option value="hhe">HHE</option> <option value="hiaf">HIAF</option> <option value="hiea">HIEA</option> <option value="hieu">HIEU</option> <option value="hila">HILA</option> <option value="hime">HIME</option> <option value="hind">HIND</option> <option value="hisa">HISA</option> <option value="hist">HIST</option> <option value="hius">HIUS</option> <option value="hr">HR</option> <option value="hsci">HSCI</option> <option value="imp">IMP</option> <option value="inst">INST</option> <option value="isbu">ISBU</option> <option value="ishu">ISHU</option> <option value="isin">ISIN</option> <option value="isls">ISLS</option> <option value="isss">ISSS</option> <option value="it">IT</option> <option value="ital">ITAL</option> <option value="ittr">ITTR</option> <option value="japn">JAPN</option> <option value="jptr">JPTR</option> <option value="jwst">JWST</option> <option value="kich">KICH</option> <option value="kine">KINE</option> <option value="klpa">KLPA</option> <option value="kor">KOR</option> <option value="lar">LAR</option> <option value="lase">LASE</option> <option value="last">LAST</option> <option value="lati">LATI</option> <option value="law">LAW</option> <option value="ling">LING</option> <option value="lngs">LNGS</option> <option value="lppa">LPPA</option> <option value="lppl">LPPL</option> <option value="lppp">LPPP</option> <option value="lpps">LPPS</option> <option value="mae">MAE</option> <option value="math">MATH</option> <option value="mdst">MDST</option> <option value="med">MED</option> <option value="mesa">MESA</option> <option value="mest">MEST</option> <option value="micr">MICR</option> <option value="misc">MISC</option> <option value="mse">MSE</option> <option value="msp">MSP</option> <option value="mubd">MUBD</option> <option value="muen">MUEN</option> <option value="mupf">MUPF</option> <option value="musi">MUSI</option> <option value="nasc">NASC</option> <option value="ncpr">NCPR</option> <option value="nesc">NESC</option> <option value="nuco">NUCO</option> <option value="nuip">NUIP</option> <option value="nurs">NURS</option> <option value="path">PATH</option> <option value="pc">PC</option> <option value="pers">PERS</option> <option value="petr">PETR</option> <option value="phar">PHAR</option> <option value="phil">PHIL</option> <option value="phs">PHS</option> <option value="phy">PHY</option> <option value="phys">PHYS</option> <option value="plac">PLAC</option> <option value="plad">PLAD</option> <option value="plan">PLAN</option> <option value="plap">PLAP</option> <option value="plcp">PLCP</option> <option value="plir">PLIR</option> <option value="plpt">PLPT</option> <option value="pmcc">PMCC</option>
                       </select>
-                      <input id="course-number-input" type="text" class="form-control my-3" placeholder="Course number">
-                      <button class="btn btn-info btn-block" type="submit">Add Course</button>
+                      <input name="course-number-input" type="text" class="form-control my-3" placeholder="Course number">
+                      <button class="btn btn-info btn-block" type="submit" name="save_text">Add Course</button>
                     </form>
                   </div>
 
 
-                      <!--<form method="POST">
+                      <!-- <form method="POST">
                         {% csrf_token %}
                         <input type="text" name="my_text" id="my-text">
                         <button type="submit" name="save_text">Save</button>
-                      </form>
-                    -->
+                      </form> -->
+                   
 
                     <div class="tutors">
-                        {% if user.course %}
+                        {% if courses %}
                         <h3>Your courses:</h3>
                           <ul>
-                              {% for course in user.course %}
+                              {% for course in courses %}
                                   <li>{{ course.title }}</li>
                               {% endfor %}
                           </ul>

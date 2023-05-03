@@ -63,7 +63,7 @@ class TutorAddClassView(generic.ListView):
             url = 'https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1238&page=1'
             response = requests.get(url + '&subject=' + request.POST['department-select'] + '&catalog_nbr=' + request.POST['course-number-input'])
             for c in response.json():
-                text = c['subject']
+                text = c['subject'] + " " + c['catalog_nbr']
             if text:
                 user_profile = request.user
                 course = CourseAsText.objects.filter(title=text).first()
@@ -74,7 +74,7 @@ class TutorAddClassView(generic.ListView):
                     findClass = course
                 user_profile.courses.add(findClass)
                 user_profile.save()
-                return redirect('/tutorme/student/')
+                return redirect('/tutorme/addClasses/')
         return JsonResponse({'status': 'error'})
     
 """
