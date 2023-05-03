@@ -59,12 +59,15 @@ class TutorAddClassView(generic.ListView):
         return self.request.user.courses.all()
 
     def post(self, request, *args, **kwargs):
+        text = "d41d8cd98f00b204e9800998ecf8427e"
         if request.method == 'POST':
             url = 'https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1238&page=1'
             response = requests.get(url + '&subject=' + request.POST['department-select'] + '&catalog_nbr=' + request.POST['course-number-input'])
             for c in response.json():
                 text = c['subject'] + " " + c['catalog_nbr']
-            if text:
+            if text == "d41d8cd98f00b204e9800998ecf8427e":
+                return redirect('/tutorme/addClasses/')
+            else:
                 user_profile = request.user
                 course = CourseAsText.objects.filter(title=text).first()
                 if (course is None):
