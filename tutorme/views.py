@@ -78,7 +78,7 @@ class TutorAddClassView(generic.ListView):
                 user_profile.courses.add(findClass)
                 user_profile.save()
 
-                return redirect('/tutorme/student/')
+                return redirect('/tutorme/addClasses/')
         return JsonResponse({'status': 'error'})
 
         """
