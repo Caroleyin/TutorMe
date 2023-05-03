@@ -109,7 +109,7 @@
                 <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
 
                   <div class = "project-grid"> 
-                    <div class = "project">
+                    <div class = "project" style="width:max-content; height:250px">
                      <a href="/" target="_blank">
                      <img src="{% static 'tutorme/home.png' %}" alt="Home">
                      <div class="overlay">
@@ -121,7 +121,7 @@
                      </a>
                     </div>
          
-                    <div class = "project">
+                    <div class = "project" style="width:max-content; height:250px">
                      <a href="/tutorme/addClasses" target="_blank">
                      <img src="{% static 'tutorme/findatutor.png' %}" alt="Find a Tutor">
                      <div class="overlay">
@@ -133,7 +133,7 @@
                     </a>
                      </div>
   
-                     <div class = "project">
+                     <div class = "project" style="width:max-content; height:250px">
                       <a href="/tutorme/student/schedule/requests" target="_blank">
                       <img src="{% static 'tutorme/requests.png' %}" alt="requests">
                       <div class="overlay">
@@ -145,7 +145,7 @@
                     </a>
                  </div>
   
-                 <div class = "project">
+                 <div class = "project" style="width:max-content; height:250px">
                   <a href="{% url 'tutorme:profile' user.username %}" target="_blank">
                   <img src="{% static 'tutorme/profile.png' %}" alt="profile">
                   <div class="overlay">
@@ -277,22 +277,22 @@
                     </div>
                 </div>
             </div>
-           <!-- <div class="col py-3"> -->
+           <div class="col py-5">
 
                 <div class = "project-grid"> 
-                  <div class = "project">
-                   <a href="/" target="_blank">
-                   <img src="{% static 'tutorme/home.png' %}" alt="Home">
-                   <div class="overlay">
-                   <div class = "project-description">
-                       <p class = "project-title">Index</p>
-                       <p class = "project-text">Return to the login page</p>
-                   </div>
-                   </div>
-                   </a>
+                  <div class = "project" style="width:max-content; height:250px">
+                    <a href="/" target="_blank">
+                    <img src="{% static 'tutorme/home.png' %}" alt="Home">
+                    <div class="overlay">
+                    <div class = "project-description">
+                        <p class = "project-title">Index</p>
+                        <p class = "project-text">Return to the login page</p>
+                    </div>
+                    </div>
+                    </a>
                   </div>
        
-                  <div class = "project">
+                  <div class = "project" style="width:max-content; height:250px">
                    <a href="/tutorme/search" target="_blank">
                    <img src="{% static 'tutorme/findatutor.png' %}" alt="Find a Tutor">
                    <div class="overlay">
@@ -304,7 +304,7 @@
                   </a>
                    </div>
 
-                   <div class = "project">
+                   <div class = "project" style="width:max-content; height:250px">
                     <a href="/tutorme/student/schedule/requests" target="_blank">
                     <img src="{% static 'tutorme/requests.png' %}" alt="requests">
                     <div class="overlay">
@@ -316,7 +316,7 @@
                   </a>
                </div>
 
-               <div class = "project">
+               <div class = "project" style="width:max-content; height:250px">
                 <a href="{% url 'tutorme:profile' user.username %}" target="_blank">
                 <img src="{% static 'tutorme/profile.png' %}" alt="profile">
                 <div class="overlay">

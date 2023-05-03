@@ -362,7 +362,7 @@
                   {% endif %}
               </div>
               {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %} 
-              <form action="{% url 'tutorme:post' user.username %}" method="post">
+              <form action="{% url 'tutorme:post' form.instance.username %}" method="post">
                 {% csrf_token %}
                 <input type="text" id="title_field" name="title_field" placeholder ="title" class="form-control mt-2" style="width:20rem">
                 <textarea class="form-control mt-2" id="comment_field" name="comment_field" placeholder="comment" rows="4"
