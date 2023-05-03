@@ -16,8 +16,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutor - Add Classes</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'tutorme/style.css' %}">
   </head>
 
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -34,13 +32,6 @@
       <symbol id="people-circle" viewBox="0 0 16 16">
         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-      </symbol>
-      <symbol id="search" viewBox="0 0 16 16">
-        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-      </symbol>
-      <symbol id="check" viewBox="0 0 16 16">
-        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
-        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
       </symbol>
   </svg>
 
@@ -62,19 +53,19 @@
                       </li>
                       <li style="padding-top: 2rem;">
                         <a href="/tutorme/addClasses/" class="nav-link active" aria-current="page">
-                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#search"></use></svg>
-                          Add Classes
+                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#speedometer2"></use></svg>
+                          Add Your Classes
                         </a>
                       </li>
-                      <li style="padding-top: 2rem;"> 
+                      <li style="padding-top: 2rem;">
                         <a href="/tutorme/student/schedule/{{user.id}}" class="nav-link text-white">
                           <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                           Schedule
                         </a>
                       </li>
-                      <li style="padding-top: 2rem;"> 
+                      <li style="padding-top: 2rem;">
                         <a href="/tutorme/student/schedule/requests" class="nav-link text-white">
-                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#check"></use></svg>
+                          <svg class="bi me-2" width="30" height="30" fill="white"><use xlink:href="#table"></use></svg>
                           Requests
                         </a>
                       </li>
@@ -92,7 +83,7 @@
                           <span class="d-none d-sm-inline mx-1">{{user}}</span>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                          
+
                           <li><a class="dropdown-item" href="{% url 'tutorme:profile' user.username %}">Profile</a></li>
                           <li>
                               <hr class="dropdown-divider">
@@ -103,48 +94,30 @@
                 </div>
             </div>
             <div class="col py-3">
-
-                Add a class by searching for your course! (Eg. CS 3240)
-
+                Add a Class by searching for you course! (Eg. CS 3240)
 
                 <body style="background: linear-gradient(to right, rgba(230,233,240,0.5), rgba(238,241,245,0.5))">
-                 
-                  <div class="searchform">
-                    <form method="get" class="border border-light py-5">
-                      <h3 class="center">Add Your Classes</h3>
-                      <div class="form-group">
-                      <label for="course">Enter a course you can tutor for:</label>
-                      <input type="text" id="course" name="course" class="form-control" placeholder="ex. CS 3240">
-                      <small id="instructions" class="form-text text-muted">Enter course mnemonic in all caps, followed by a space and the course number.</small>
-                    </div>
-                      <button class="btn btn-info btn-block" name="save_text" type="submit">Add Course</button>
-                  </form>
-                  </div>
 
 
-                      <!--<form method="POST">
+
+                    <div class ="main">
                       <form method="POST">
                         {% csrf_token %}
                         <input type="text" name="my_text" id="my-text">
                         <button type="submit" name="save_text">Save</button>
                       </form>
-                    -->
-                  
-                    
 
-                    <div class="tutors">
                         {% if courses %}
-                        <h3>Your courses:</h3>
                           <ul>
                               {% for course in courses %}
                                   <li>{{ course.title }}</li>
                               {% endfor %}
                           </ul>
                         {% else %}
-                          <p>No courses found, add a course to get started.</p>
+                          <p>No courses found.</p>
                         {% endif %}
-                        
-                          </div>
+                    </div>
+
                 </body>
             </div>
         </div>
